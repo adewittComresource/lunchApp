@@ -10,7 +10,9 @@
 <body class="claro">
     <!-- It's important to get something displayed to users as quickly as possible; here, we show a very basic loading
          screen, which becomes hidden once the application loads -->
-    <div class="lunchAppContainer"></div>
+    <div class="lunchAppContainer">
+        <div id="mainContainer"></div>
+    </div>
 
     <!-- dojo.js is an AMD-compliant loader script. It accepts configuration either from a data-dojo-config attribute
          on the dojo.js script tag, from a global dojoConfig object (shown here), or from a global require object.
@@ -33,6 +35,8 @@
                     {name: "dijit", location: "js/dijit"},
                     {name: "dojox", location: "js/dojox"},
                     {name: "dgrid", location: "js/dgrid"},
+                    {name: "xstyle", location: "js/xstyle"},
+                    {name: "put-selector", location: "js/put-selector"},
                     {name: "lunchApp", location: "js/lunchApp"}
             ],
             // Use the smaller, faster "lite" CSS selector engine, which works in all browsers IE8+

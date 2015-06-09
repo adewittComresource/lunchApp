@@ -36,7 +36,7 @@ public class Restaurants implements Serializable {
     }
 
     //name
-    public String getFileName() {
+    public String getName() {
         return name;
     }
     public void setName(String name) {
