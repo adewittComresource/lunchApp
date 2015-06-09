@@ -21,19 +21,16 @@ public class ReadRestaurants {
     public Response getAll() throws Exception {
         EntityManager entityManager = PersistenceManager.getEntityManager();
         ResponseBuilder builder;
-
         //Query the database with hibernate
         Session sess = entityManager.unwrap(Session.class);
         Criteria crit = sess.createCriteria(Restaurants.class);
 
         //Query for Results
         Collection<?> results = crit.list();
-
         //Send Results to user
         if (results != null) {
             entityManager.detach(results);
         }
-
         builder = Response.ok(results);
         if (builder == null) {
             throw new Exception("builder == null");

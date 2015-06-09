@@ -7,11 +7,16 @@ define([
     "dojo/store/Memory",
     "dojo/data/ObjectStore",
     "dijit/_WidgetBase",
+    "dijit/form/Button",
+    "dojo/on",
+    "dojo/_base/lang",
     "dgrid/extensions/DijitRegistry",
     "dgrid/OnDemandGrid",
     'dgrid/extensions/Pagination',
-    'dgrid/Selection'
-], function (declare,template,_ContentPaneResizeMixin,_TemplatedMixin,JsonRest,Memory,ObjectStore,_WidgetBase,DijitRegistry,OnDemandGrid,Pagination,Selection) {
+    'dgrid/Selection',
+    "./main"
+], function (declare,template,_ContentPaneResizeMixin,_TemplatedMixin,JsonRest,Memory,
+ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Selection,lunchApp) {
 
     return declare("lunchApp.restaurantGrid", [_WidgetBase, _TemplatedMixin, _ContentPaneResizeMixin], {
         templateString: template,
@@ -25,6 +30,7 @@ define([
         buildRendering: function () {
             this.inherited(arguments);
             this.containerNode = this.domNode;
+            lunchAppGlobal.restaurantGrid = this;
 
             //Empty Store
             var emptyStore = new ObjectStore({objectStore: this._dataStore});
@@ -49,12 +55,12 @@ define([
                         label: "Address"
                     },
                     zip: {
-                        label: "City,State,Zip",
+                        label: "City,State Zip",
                         renderCell: function (item, rowIndex, cell) {
                             //Create the dom node to be used to contain the data
                             var cityStatZipContainer = document.createElement('div');
                             //Concat the 3 fields into a variable
-                            var cityStateZip = item.city + ", " + item.state + item.zip;
+                            var cityStateZip = item.city + ", " + item.state +" "+ item.zip;
                             //Set the innerHTML to the variable
                             cityStatZipContainer.innerHTML = cityStateZip;
                             //Return the domNode
@@ -101,6 +107,21 @@ define([
             this.grid.startup();
             //Populate Grid so it will load properly after login
             this.populateGrid();
+            
+            //Save button for our form
+            //Documentation for this widgets properties and events can be found here
+            //https://dojotoolkit.org/api/?qs=1.10/dijit/form/Button
+            this.btnCreateNewRestaurant = Button({
+                id: "createNewRestaurantButton",
+                name: "createRestaurant",
+                label: "Add New"
+            }).placeAt(this.restaurantGridFooter);
+            //Attach a click event to the button
+            on(this.btnCreateNewRestaurant, "click", lang.hitch(this, this.showCreateRestaurant));
+        },
+        
+        showCreateRestaurant:function(){
+            lunchAppGlobal.main.addLunchLocationDialog.show();
         },
         
         populateGrid: function () {

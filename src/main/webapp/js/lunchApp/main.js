@@ -28,6 +28,7 @@ define([
     'dojo/domReady!'
 ], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid) {
     var lunchApp = {};
+    lunchAppGlobal.main = lunchApp;
     
     // Main Container
     var mainContainer = BorderContainer({
@@ -41,7 +42,6 @@ define([
         useSlider: false
     });
     
-
     //Lunch Suggestions
     var suggestionPane = new ContentPane({
         title: "Suggestions",
@@ -80,7 +80,7 @@ define([
     //Add Dialog for Creating New Lunch Location
     lunchApp.addLunchLocationDialog = new Dialog({
         id: "addLunchLocation",
-        title: "Lunch Location",
+        title: "Add Restaurant",
         content:lunchLocationWidget,
         style: "width: 50%;font-size:18px;text-align:center;"
     });

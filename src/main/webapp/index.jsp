@@ -50,6 +50,9 @@
     <!-- Load the application. Note that this module ID is hard-coded in build.sh in order to provide
          an optimised build that loads as few as one script for the entire application. If you change the name or
          location of this module, you will need to update build.sh too. -->
-    <script>require([ 'js/lunchApp/main' ]);</script>
+    <script>
+        var lunchAppGlobal = {};
+        require([ 'js/lunchApp/main' ]);
+    </script>
 </body>
 </html>

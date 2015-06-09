@@ -16,3 +16,12 @@ html,body{
     width:50%;
     min-width:150px;
 }
+
+.restaurantGridFooter{
+    background-color: #DDD;
+    height:40px;
+    text-align: center;
+}
+.claro .dijitContentPane{
+    padding:0px !important;
+}

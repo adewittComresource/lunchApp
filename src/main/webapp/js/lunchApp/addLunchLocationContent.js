@@ -19,6 +19,7 @@ define([
         },
         buildRendering: function () {
             this.inherited(arguments);
+            lunchAppGlobal.lunchLocation = this;
 
             //Location name Textbox
             //Documentation for this widgets properties and events can be found here
@@ -71,36 +72,46 @@ define([
                 label: "Create"
             }).placeAt(this.createLocation);
             //Attach a click event to the button
-            on(this.btnCreateLocation, "click", lang.hitch(this, this.createLocation));
+            on(this.btnCreateLocation, "click", lang.hitch(this, this.insertRestaurant));
 
             lunchApp.addLocationContent = this;
         },
-        createPattern: function () {
+        insertRestaurant: function () {
             var self = this;
-            //Get Variables
-            var patternName = this.txtPatternName.get('value');
-            var valid = true;
+            
+            //Get the input values into variables
+            var name = this.txtLocationName.get('value');
+            var city = this.txtLocationCity.get('value');
+            var state = this.txtLocationState.get('value');
+            var address = this.txtLocationAddress.get('value');
+            var zip = this.txtLocationZip.get('value');
+            var website = this.txtLocationWebsite.get('value');
 
-            //Do validation before the POST
-            if (valid) {
-                //Post to create the Pattern
-                var xhrArgs = {
-                    url: "/SFG_Tool/services/insertPatternDataFlow/",
-                    postData: dojo.toJson({patternName: patternName}),
-                    handleAs: "json",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    load: function (data) {
-                        //DO Stuff after the POST is finished
-                    },
-                    error: function (error) {
-                        //POST ERROR
-                    }
-                };
-                // Call the asynchronous xhrPost
-                var deferred = dojo.xhrPost(xhrArgs);
-            }
+            //Post to create the restaurant
+            var xhrArgs = {
+                url: "/lunchApp/services/insertRestaurants/",
+                postData: dojo.toJson({
+                    name: name,
+                    city: city,
+                    state: state,
+                    address: address,
+                    zip: zip,
+                    website: website
+                }),
+                handleAs: "json",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                load: function (data) {
+                    //DO Stuff after the POST is finished
+                    lunchAppGlobal.main.addLunchLocationDialog.hide();
+                },
+                error: function (error) {
+                    //POST ERROR
+                }
+            };
+            // Call the asynchronous xhrPost
+            var deferred = dojo.xhrPost(xhrArgs);
         },
         clearDialog: function () {
             //Clear Dialog back to Default 
