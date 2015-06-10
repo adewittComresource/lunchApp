@@ -58,7 +58,7 @@ define([
     });
     mainTabContainer.addChild(restaurantListPane);
     
-    on(restaurantListPane, "show", function(item){
+    on(restaurantListPane, "show", function(){
         restaurantContentWidget.grid.resize();
     });
     

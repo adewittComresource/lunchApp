@@ -13,12 +13,13 @@ define([
     "dgrid/extensions/DijitRegistry",
     "dgrid/OnDemandGrid",
     'dgrid/extensions/Pagination',
-    'dgrid/Selection',
-    "./main"
+    'dgrid/Selection'
 ], function (declare,template,_ContentPaneResizeMixin,_TemplatedMixin,JsonRest,Memory,
-ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Selection,lunchApp) {
+ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Selection) {
 
     return declare("lunchApp.restaurantGrid", [_WidgetBase, _TemplatedMixin, _ContentPaneResizeMixin], {
+        //Template used for this widget
+        //https://dojotoolkit.org/documentation/tutorials/1.10/templated/
         templateString: template,
         constructor: function (args) {
             if (args.parent) {
@@ -91,27 +92,19 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                     }
                 }
             },this.restaurantGridContainer);
-
-//            grid.on('dgrid-select', function (event) {
-//                //set row index to current row
-//                sfgTool.flowOverviewGrid.selectedIndex = event.rowIndex;
-//                //get selected row
-//                var selectedRow = event.rows[0].data;
-//                //Check if already selected
-//                if (selectedRow !== sfgTool.flowOverviewGrid.currentSelectedRow) {
-//                    //enable the delete button
-//                    sfgTool.flowOverviewGridHeader.deleteButton.set('disabled', false);
-//                    sfgTool.flowOverviewGridHeader.copyButton.set('disabled', false);
-//                    //save selected row in module
-//                    sfgTool.flowOverviewGrid.currentSelectedRow = selectedRow;
-//                }
-//            });
-//
-//            grid.on('dgrid-deselect', function (event) {
-//                sfgTool.flowOverviewGridHeader.deleteButton.set('disabled', true);
-//                sfgTool.flowOverviewGridHeader.copyButton.set('disabled', true);
-//                sfgTool.flowOverviewGrid.currentSelectedRow = "";
-//            });
+            
+            //Attach an event listener to the grid select
+            this.grid.on('dgrid-select', function (event) {
+                console.log('grid selected');
+            });
+            //Attach an event listener to the grid deselect
+            this.grid.on('dgrid-deselect', function (event) {
+                console.log('grid deselected');
+            });
+            //This event will fire after the grid has finished loading.
+            this.grid.on('dgrid-refresh-complete', function (event) {
+                console.log('refreshed Grid Complete');
+            });
 
             //Places the Grid in the DOM
             //If you do not call this then the widget will not show up
@@ -138,6 +131,7 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
         
         populateGrid: function () {
             //Create the rest store to be used for the grid
+            //http://dojotoolkit.org/reference-guide/1.10/dojo/store/JsonRest.html
             var restStore = JsonRest({
                 target: "/lunchApp/services/restaurants",
                 idProperty: 'restaurantId',

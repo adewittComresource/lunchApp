@@ -7,19 +7,19 @@
          the build system to combine & minify it. -->
     <link rel="stylesheet" href="css/style.css">
 </head>
+<!-- The claro class configures the theme for the application --> 
+<!--http://dojotoolkit.org/reference-guide/1.10/dijit/themes.html-->
 <body class="claro">
-    <!-- It's important to get something displayed to users as quickly as possible; here, we show a very basic loading
-         screen, which becomes hidden once the application loads -->
+    <!--Container for the Application-->
     <div class="lunchAppContainer">
         <div id="mainContainer"></div>
     </div>
 
     <!-- dojo.js is an AMD-compliant loader script. It accepts configuration either from a data-dojo-config attribute
-         on the dojo.js script tag, from a global dojoConfig object (shown here), or from a global require object.
-         Configuration options for the loader can be viewed at http://dojotoolkit.org/reference-guide/loader/amd.html
-         along with a bunch of additional information about its features.
-         NOTE: build.sh is responsible for removing the "isDebug" flag when deploying to production. If you modify
-         this flag at all, you will break the build! -->
+        on the dojo.js script tag, from a global dojoConfig object (shown here), or from a global require object.
+        Configuration options for the loader can be viewed at http://dojotoolkit.org/reference-guide/loader/amd.html
+        along with a bunch of additional information about its features.
+    -->
     <script>
         var dojoConfig = {
             // Enable the AMD loader
