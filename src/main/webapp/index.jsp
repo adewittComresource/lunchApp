@@ -28,8 +28,7 @@
             baseUrl: '.',
             // Enable debugging
             isDebug: true,
-            // Register the packages we are going to be using. These same packages should be defined in the
-            // build profile in `app.profile.js`.
+            // Register the packages we are going to be using. 
             packages: [
                     {name: "dojo", location: "js/dojo"},
                     {name: "dijit", location: "js/dijit"},
@@ -47,9 +46,6 @@
         };
     </script>
     <script src="js/dojo/dojo.js"></script>
-    <!-- Load the application. Note that this module ID is hard-coded in build.sh in order to provide
-         an optimised build that loads as few as one script for the entire application. If you change the name or
-         location of this module, you will need to update build.sh too. -->
     <script>
         var lunchAppGlobal = {};
         require([ 'js/lunchApp/main' ]);
