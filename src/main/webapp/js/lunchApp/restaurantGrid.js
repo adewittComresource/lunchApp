@@ -24,22 +24,24 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
             if (args.parent) {
                 this._parent = args.parent;
             }
-            // Empty datastore for reset purposes
-            this._dataStore = Memory({data: []});
         },
         buildRendering: function () {
             this.inherited(arguments);
-            this.containerNode = this.domNode;
+            //This gives us access to this widget from the console
+            //having access to this variable makes it much easier to debug your widgets
+            //This variable can also be easily used to call this widget from other widgets methods
             lunchAppGlobal.restaurantGrid = this;
 
-            //Empty Store
-            var emptyStore = new ObjectStore({objectStore: this._dataStore});
+            //Rest store to initialize the grid with
+            //Make sure your idProperty in unqiue
             var restStore = JsonRest({
                 target: "/lunchApp/services/restaurants",
                 idProperty: 'restaurantId',
                 sortParam: "sortBy"
             });
 
+            //dGrid Docs
+            //https://github.com/SitePen/dgrid/blob/v0.4.0/doc/components/core-components/OnDemandList-and-OnDemandGrid.md
             this.grid = new OnDemandGrid({
                 id: 'restaurantGrid',
                 collection: restStore,
@@ -47,7 +49,10 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                 selectionMode: 'single',
                 minRowsPerPage: 2000,
                 maxRowsPerPage: 2000,
+                //http://dgrid.io/tutorials/0.4/defining_grid_structures/
                 columns: {
+                    //Make sure these correspond to a Column in your Dataset 
+                    //Only exception is this is not necessary if using the renderCell Property
                     name: {
                         label: "Name",
                     },
@@ -55,7 +60,11 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                         label: "Address"
                     },
                     zip: {
+                        //Table Header Value
                         label: "City,State Zip",
+                        //This is a function that formats a table cell
+                        //This is mainly used for adding widgets to cells or formatting data like so
+                        //https://github.com/SitePen/dgrid/blob/v0.3.15/doc/components/core-components/Grid.md
                         renderCell: function (item, rowIndex, cell) {
                             //Create the dom node to be used to contain the data
                             var cityStatZipContainer = document.createElement('div');
@@ -104,8 +113,10 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
 //                sfgTool.flowOverviewGrid.currentSelectedRow = "";
 //            });
 
+            //Places the Grid in the DOM
+            //If you do not call this then the widget will not show up
             this.grid.startup();
-            //Populate Grid so it will load properly after login
+            //Populate Grid
             this.populateGrid();
             
             //Save button for our form
@@ -121,15 +132,18 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
         },
         
         showCreateRestaurant:function(){
+            //Show the dialog so the user can create a new Restaurant
             lunchAppGlobal.main.addLunchLocationDialog.show();
         },
         
         populateGrid: function () {
+            //Create the rest store to be used for the grid
             var restStore = JsonRest({
                 target: "/lunchApp/services/restaurants",
                 idProperty: 'restaurantId',
                 sortParam: "sortBy"
             });
+            //Whenever you set the store for a grid it will refresh the grids data
             this.grid.set("store",restStore);
         },
         
