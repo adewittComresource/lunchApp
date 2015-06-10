@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 
 @Path("/insertRestaurants")
 public class InsertRestaurants {
-    //Insert into Database
+    //POST METHOD
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -33,11 +33,17 @@ public class InsertRestaurants {
         final String id = UUID.randomUUID().toString();
         restaurants.setRestaurantId(id);
         
+        //Catch any insert errors and roll back the transaction
         try {
             EntityTransaction transaction = entityManager.getTransaction();
             transaction.begin();
+            //Insert the Restaurant Instance 
+            //http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html#persist(java.lang.Object)
             entityManager.persist(restaurants);
+            //http://docs.oracle.com/javaee/6/api/javax/persistence/EntityTransaction.html#commit()
             transaction.commit();
+            //Remove the given entity from the persistence context
+            //http://docs.oracle.com/javaee/6/api/javax/persistence/EntityManager.html#detach(java.lang.Object)
             entityManager.detach(restaurants);
             builder = Response.ok(restaurants);
             if (builder == null) {
