@@ -35,9 +35,9 @@ public class DeleteRestaurantProfile {
         EntityManager entityManager = PersistenceManager.getEntityManager();
         Response.ResponseBuilder builder;
         //parse JSON object
-        JSONObject restaurantJSON = (JSONObject) JSONSerializer.toJSON(restaurantProfile);
+        JSONObject restaurantProfileJSON = (JSONObject) JSONSerializer.toJSON(restaurantProfile);
         //GET File ID
-        final String restaurantProfileId = (String) restaurantJSON.get("restaurantsProfileId");
+        final String restaurantProfileId = (String) restaurantProfileJSON.get("restaurantsProfileId");
         try {
             entityManager.getTransaction().begin();
             // Find the File in the database
