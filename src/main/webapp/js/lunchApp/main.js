@@ -28,7 +28,6 @@ define([
     'dojo/domReady!'
 ], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid) {
     var lunchApp = {};
-    lunchAppGlobal.main = lunchApp;
     
     // Main Container
     var mainContainer = BorderContainer({
@@ -50,7 +49,6 @@ define([
     mainTabContainer.addChild(suggestionPane);
 
     var restaurantContentWidget = restaurantGrid({ parent: this });
-    lunchApp.restaurantContent = restaurantContentWidget;
     //Restaurants
     var restaurantListPane = new ContentPane({
         title: "Restaurants",
@@ -78,13 +76,14 @@ define([
     //Lunch Location Content
     var lunchLocationWidget = addLunchLocationContent({ parent: this });
     //Add Dialog for Creating New Lunch Location
-    lunchApp.addLunchLocationDialog = new Dialog({
+    var addLunchLocationDialog = new Dialog({
         id: "addLunchLocation",
         title: "Add Restaurant",
         content:lunchLocationWidget,
         style: "width: 50%;font-size:18px;text-align:center;"
     });
-
+     //This creates a global that can be referenced by other widgets or when you are debugging
+    lunchAppGlobal.addLunchRestaurantDialog = addLunchLocationDialog;
     // It is important to remember to always call startup on widgets
     // It will not hurt if you do it twice, but things will often not work right if you forget to do it
     lunchApp.addLunchLocationDialog.startup();

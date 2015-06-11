@@ -28,6 +28,7 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
         },
         buildRendering: function () {
             this.inherited(arguments);
+            this.containerNode = this.domNode;
             //This gives us access to this widget from the console
             //having access to this variable makes it much easier to debug your widgets
             //This variable can also be easily used to call this widget from other widgets methods
@@ -126,7 +127,7 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
         
         showCreateRestaurant:function(){
             //Show the dialog so the user can create a new Restaurant
-            lunchAppGlobal.main.addLunchLocationDialog.show();
+            lunchAppGlobal.addLunchRestaurantDialog.show();
         },
         
         populateGrid: function () {
