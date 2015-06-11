@@ -19,7 +19,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 /**
  *
- * @author LabUser1
+ * @author Jason
  */
 @Path("/users")
 public class ReadUser {

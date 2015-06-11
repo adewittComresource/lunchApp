@@ -21,7 +21,7 @@ import net.sf.json.JSONSerializer;
 
 /**
  *
- * @author LabUser1
+ * @author Jason
  */
 @Path("/updateUser")
 public class UpdateUser {
