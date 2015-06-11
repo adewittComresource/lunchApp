@@ -86,7 +86,7 @@ define([
     lunchAppGlobal.addLunchRestaurantDialog = addLunchLocationDialog;
     // It is important to remember to always call startup on widgets
     // It will not hurt if you do it twice, but things will often not work right if you forget to do it
-    lunchApp.addLunchLocationDialog.startup();
+    addLunchLocationDialog.startup();
 
     // Returning a value from an AMD module means that it becomes the value of the module. In this case, we return
     // the app object, which means that other parts of the application that require app/main could get a reference
