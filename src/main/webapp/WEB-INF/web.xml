@@ -54,6 +54,6 @@
         <env-entry-value>lunchApp</env-entry-value>
     </env-entry>
     <listener>
-        <listener-class>com.comresource.lunchapp.PersistenceManager</listener-class>
+     <listener-class>com.comresource.lunchapp.PersistenceManager</listener-class>
     </listener>
 </web-app>
