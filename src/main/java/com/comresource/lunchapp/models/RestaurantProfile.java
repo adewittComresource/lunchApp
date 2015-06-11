@@ -45,7 +45,7 @@ public class RestaurantProfile implements Serializable {
         this.restaurantId = restaurantId;
     }
     //userId
-    public String getFileUserId() {
+    public String getUserId() {
         return userId;
     }
     public void setUserId(String userId) {
@@ -93,4 +93,22 @@ public class RestaurantProfile implements Serializable {
     public void setOptIn(String optIn) {
         this.optIn = optIn;
     }
+
+    public void update(String restaurantProfileId, String restaurantId, String userId, String timeFactor, String costFactor, String postLunchFullnessFactor, String deliciousnessFactor, String postLunchDiscomfortFactor, String optIn) {
+        this.restaurantProfileId = restaurantProfileId;
+        this.restaurantId = restaurantId;
+        this.userId = userId;
+        this.timeFactor = timeFactor;
+        this.costFactor = costFactor;
+        this.postLunchFullnessFactor = postLunchFullnessFactor;
+        this.deliciousnessFactor = deliciousnessFactor;
+        this.postLunchDiscomfortFactor = postLunchDiscomfortFactor;
+        this.optIn = optIn;
+    }
+
+    public void update( String timeFactor, String costFactor, String postLunchFullnessFactor, String deliciousnessFactor, String postLunchDiscomfortFactor, String optIn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }
