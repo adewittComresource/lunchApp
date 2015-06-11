@@ -31,4 +31,10 @@ public class Users implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public void update(String userId, String name) {
+        this.userID = userId;
+        this.userName = name;
+        
+    }
 }
