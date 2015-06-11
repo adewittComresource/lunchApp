@@ -25,8 +25,7 @@ public class Restaurants implements Serializable {
     private String zip;
     @Column(name = "WEBSITE")
     private String website;
-    
-    
+
     //restaurantId
     public String getRestaurantId() {
         return restaurantId;
@@ -34,7 +33,6 @@ public class Restaurants implements Serializable {
     public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
     }
-
     //name
     public String getName() {
         return name;
@@ -42,7 +40,6 @@ public class Restaurants implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
     //city
     public String getCity() {
         return city;
@@ -50,7 +47,6 @@ public class Restaurants implements Serializable {
     public void setCity(String city) {
         this.city = city;
     }
-    
     //state
     public String getState() {
         return state;
@@ -58,7 +54,6 @@ public class Restaurants implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
-    
     //address
     public String getAddress() {
         return address;
@@ -66,7 +61,6 @@ public class Restaurants implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-    
     //zip
     public String getZip() {
         return zip;
@@ -74,7 +68,6 @@ public class Restaurants implements Serializable {
     public void setZip(String zip) {
         this.zip = zip;
     }
-    
     //website
     public String getWebsite() {
         return website;
@@ -83,4 +76,12 @@ public class Restaurants implements Serializable {
         this.website = website;
     }
     
+    public void update(String name, String city, String state, String address, String zip, String website) {
+        this.name = name;
+        this.city = city;
+        this.state = state;
+        this.address = address;
+        this.zip = zip;
+        this.website = website;
+    }
 }
