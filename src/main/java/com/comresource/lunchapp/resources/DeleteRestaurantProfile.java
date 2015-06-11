@@ -24,7 +24,7 @@ import net.sf.json.JSONSerializer;
  * @author Rob
  */
 
-@Path("/deleteRestaurantProfile")
+@Path("/deleteRestaurantsProfile")
 public class DeleteRestaurantProfile {
 
     //Delete From Database
@@ -37,7 +37,7 @@ public class DeleteRestaurantProfile {
         //parse JSON object
         JSONObject restaurantProfileJSON = (JSONObject) JSONSerializer.toJSON(restaurantProfile);
         //GET File ID
-        final String restaurantProfileId = (String) restaurantProfileJSON.get("restaurantProfileId");
+        final String restaurantProfileId = (String) restaurantProfileJSON.get("restaurantsProfileId");
         try {
             entityManager.getTransaction().begin();
             // Find the File in the database
