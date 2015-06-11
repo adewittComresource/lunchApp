@@ -24,7 +24,7 @@ import net.sf.json.JSONSerializer;
  * @author Rob
  */
 
-@Path("/deleteRestaurants")
+@Path("/deleteRestaurantsProfile")
 public class DeleteRestaurantProfile {
 
     //Delete From Database
