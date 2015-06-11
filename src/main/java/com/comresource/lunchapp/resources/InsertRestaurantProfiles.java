@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
-@Path("/insertRestaurantProfiless")
+@Path("/insertRestaurantProfiles")
 public class InsertRestaurantProfiles {
     //POST METHOD
     @POST
