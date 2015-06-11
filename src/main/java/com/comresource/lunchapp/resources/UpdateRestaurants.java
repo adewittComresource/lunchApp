@@ -2,10 +2,8 @@ package com.comresource.lunchapp.resources;
 
 import com.comresource.lunchapp.PersistenceManager;
 import com.comresource.lunchapp.models.Restaurants;
-import java.text.SimpleDateFormat;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
