@@ -1,7 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.comresource.lunchapp.resources;
 
 import com.comresource.lunchapp.PersistenceManager;
-import com.comresource.lunchapp.models.Restaurants;
+import com.comresource.lunchapp.models.RestaurantProfile;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.ws.rs.Consumes;
@@ -11,30 +16,34 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 
+/**
+ *
+ * @author Rob
+ */
+
 @Path("/deleteRestaurants")
-public class DeleteRestaurants {
+public class DeleteRestaurantProfile {
 
     //Delete From Database
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void create(String restaurant) throws Exception {
+    public void create(String restaurantProfile) throws Exception {
         EntityManager entityManager = PersistenceManager.getEntityManager();
-        ResponseBuilder builder;
+        Response.ResponseBuilder builder;
         //parse JSON object
-        JSONObject restaurantJSON = (JSONObject) JSONSerializer.toJSON(restaurant);
+        JSONObject restaurantJSON = (JSONObject) JSONSerializer.toJSON(restaurantProfile);
         //GET File ID
-        final String restaurantId = (String) restaurantJSON.get("restaurantId");
+        final String restaurantProfileId = (String) restaurantJSON.get("restaurantsProfileId");
         try {
             entityManager.getTransaction().begin();
             // Find the File in the database
-            Restaurants found = entityManager.find(Restaurants.class, restaurantId);
+            RestaurantProfile found = entityManager.find(RestaurantProfile.class, restaurantProfileId);
             if (found == null) {
-                throw new PersistenceException("Restaurant with key: " + restaurantId + " not found.");
+                throw new PersistenceException("Restaurant with key: " + restaurantProfileId + " not found.");
             }
             // Delete Row
             entityManager.remove(found);
