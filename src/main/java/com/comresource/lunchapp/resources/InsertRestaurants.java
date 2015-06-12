@@ -6,6 +6,7 @@
 package com.comresource.lunchapp.resources;
 
 import com.comresource.lunchapp.PersistenceManager;
+import com.comresource.lunchapp.models.Is_Open;
 import com.comresource.lunchapp.models.Restaurants;
 import java.util.UUID;
 import javax.persistence.EntityManager;
@@ -49,6 +50,31 @@ public class InsertRestaurants {
             if (builder == null) {
                 throw new Exception("builder == null");
             }
+            
+            EntityTransaction transactionIsOpen = entityManager.getTransaction();
+            transactionIsOpen.begin();
+            //Create new instance of IS_OPEN 
+            Is_Open isOpen = new Is_Open();
+            //Generate GUID
+            final String openId = UUID.randomUUID().toString();
+            //Add Values to Is_Open
+            isOpen.setOpenId(openId);
+            isOpen.setRestaurantId(id);
+            isOpen.setMonday(1);
+            isOpen.setTuesday(1);
+            isOpen.setWednesday(1);
+            isOpen.setThursday(1);
+            isOpen.setFriday(1);
+            isOpen.setSaturday(1);
+            isOpen.setSunday(1);
+            entityManager.persist(isOpen);
+            
+            transactionIsOpen.commit();
+            
+            entityManager.detach(isOpen);
+            
+            
+            
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
