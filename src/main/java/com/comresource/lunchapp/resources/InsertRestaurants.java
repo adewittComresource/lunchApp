@@ -6,6 +6,7 @@
 package com.comresource.lunchapp.resources;
 
 import com.comresource.lunchapp.PersistenceManager;
+import com.comresource.lunchapp.models.Is_Open;
 import com.comresource.lunchapp.models.Restaurants;
 import java.util.UUID;
 import javax.persistence.EntityManager;
@@ -25,7 +26,7 @@ public class InsertRestaurants {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(Restaurants restaurants) throws Exception {
+    public Response create(Restaurants restaurants, Is_Open isOpen) throws Exception {
         EntityManager entityManager = PersistenceManager.getEntityManager();
         ResponseBuilder builder = null;
         //Create the GUID for the new Restaurant
@@ -49,6 +50,36 @@ public class InsertRestaurants {
             if (builder == null) {
                 throw new Exception("builder == null");
             }
+            
+            EntityTransaction transactionIsOpen = entityManager.getTransaction();
+            transactionIsOpen.begin();
+            //Create new instance of IS_OPEN 
+            //Generate GUID
+            final String openId = UUID.randomUUID().toString();
+            //Add Values to Is_Open
+            isOpen.setOpenId(openId);
+            isOpen.setRestaurantId(id);
+            isOpen.setMonday(1);
+            isOpen.setTuesday(1);
+            isOpen.setWednesday(1);
+            isOpen.setThursday(1);
+            isOpen.setFriday(1);
+            isOpen.setSaturday(1);
+            isOpen.setSunday(1);
+            entityManager.persist(isOpen);
+            
+            transactionIsOpen.commit();
+            
+            entityManager.detach(isOpen);
+            
+            builder = Response.ok(isOpen);
+            if (builder == null) {
+                throw new Exception("builder == null");
+            }
+            
+            
+          
+            
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
