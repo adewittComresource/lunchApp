@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <%@page import="javax.servlet.http.HttpSession"%>
 <% 
-//    HttpSession currentSession = request.getSession();
-//    String authenticated = (String) currentSession.getAttribute("authenticated");
-//    if (authenticated == null) {
-//        response.sendRedirect("/lunchApp/loginPage.jsp");
-//    }
+    HttpSession currentSession = request.getSession();
+    String authenticated = (String) currentSession.getAttribute("authenticated");
+    if (authenticated == null) {
+        response.sendRedirect("/lunchApp/loginPage.jsp");
+    }
 %>
 <html>
     <head>
