@@ -25,6 +25,7 @@ define([
     "dojo/on",
     "./addLunchLocationContent",
     "./restaurantGrid",
+    
     'dojo/domReady!'
 ], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid) {
     var lunchApp = {};
