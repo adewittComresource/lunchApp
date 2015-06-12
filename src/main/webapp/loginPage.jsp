@@ -27,7 +27,7 @@
 
 <html>
     <head>
-        <link rel="shortcut icon" type="image/png" href="media/favicon.png"/>
+<!--        <link rel="shortcut icon" type="image/png" href="media/favicon.png"/>-->
         <title>Login</title>
         <link rel="stylesheet" href="js/dijit/themes/claro/claro.css" />
         <link rel="stylesheet" href="css/style.css" />
@@ -132,14 +132,13 @@
                 Lunch App <%= loginHeader%>
             </div>
 
-            <form id='autoLogin' method="post" target="_blank">
+            <form id='userLogin' method="post" target="_blank">
 
-                <div id='loginUsername'></div>
-                <div id='loginPassword'></div>
+                <div id='userNameLogin'></div>
+                <div id='passwordLogin'></div>
 
-                <input name="action" type="hidden" value="JLoginUser">
-                <input name="serverTimeStamp" type="hidden" value="1405355972051">
-                <input name="clientTimeStamp" type="hidden" value="1405356003359">
+                <input name="action" type="hidden" value="LoginUser">
+              
             </form> 
 
 
@@ -150,9 +149,9 @@
             require({
                 baseUrl: "/",
                 packages: [
-                    {name: "dojo", location: "SFG_Tool/js/dojo"},
-                    {name: "dijit", location: "SFG_Tool/js/dijit"},
-                    {name: "dojox", location: "SFG_Tool/js/dojox"}
+                    {name: "dojo", location: "../js/dojo"},
+                    {name: "dijit", location: "../js/dijit"},
+                    {name: "dojox", location: "../js/dojox"}
                 ]
             });
             require([
@@ -176,13 +175,14 @@
                         //Variables
                         //var submitButton = dom.byId('loginSubmit');
                         var submitButton = dom.byId('loginButtonContainer');
-                        var usernameTextbox = dom.byId('loginUsername');
-                        var passwordTextbox = dom.byId('loginPassword');
+                        var usernameTextbox = dom.byId('userNameLogin');
+                        var passwordTextbox = dom.byId('passwordLogin');
 
                         //UserName Textbox
                         this.userNameTextbox = new ValidationTextBox({
                             'class': 'textInput',
                             name: 'username',
+                             regExp: ".+",
                             placeHolder: "Enter Username"
                         }, "text").placeAt(usernameTextbox);
 
@@ -191,6 +191,7 @@
                             'class': 'textInput',
                             name: 'password',
                             type: 'password',
+                            regExp: ".+",
                             placeHolder: "Enter Password"
                         }, "password").placeAt(passwordTextbox);
 
@@ -220,85 +221,85 @@
                             var username = self.userNameTextbox.get('value');
                             var password = self.passwordTextbox.get('value');
 
-                            if (username !== '' && password !== '') {
-                                var xhrArgs = {
-                                    url: "/SFG_Tool/services/checkAuthentication",
-                                    postData: dojo.toJson({username: username, password: password}),
-                                    handleAs: "text",
-                                    headers: {
-                                        "Content-Type": "application/json"
-                                    },
-                                    load: function (data) {
-                                        //Revert border styling
-                                        var passwordNode = dom.byId("loginPassword");
-                                        passwordNode.lastElementChild.style.borderColor = 'black';
-                                        passwordNode.lastElementChild.style.borderWidth = '1px';
-
-                                        var jsonCookie = JSON.parse(data);
-                                        var sessionID = jsonCookie.JSESSIONID;
-                                        var readOnly = jsonCookie.readOnly;
-
-                                        if (readOnly === 'false') {
-//									var loginForm = dom.byId("autoLogin");
-//									loginForm.submit();                                                                
-                                            setInterval(function () {
-                                                window.location.href = "/SFG_Tool";
-                                            }, 500);
-                                        } else {
-                                            window.location.href = "/SFG_Tool";
-                                        }
-                                    },
-                                    error: function (error) {
-                                        // We'll 404 in the demo, but that's okay.  We don't have a 'postIt' service on the
-                                        // docs server.
-                                        var passwordNode = dom.byId("loginPassword");
-                                    
-                                        var shakeEffectLeft = baseFx.animateProperty({
-                                            node: passwordNode,
-                                            properties: {
-                                                marginLeft: {
-                                                    start: 20,
-                                                    end: 0,
-                                                    unit: "px"
-                                                },
-                                                marginRight: {
-                                                  start: 20,
-                                                  end: 0,
-                                                  unit: "px"
-                                                }
-                                            },
-                                            easing: easing.elasticInOut,
-                                            duration: 100
-                                        });
-
-                                        var shakeEffectRight = baseFx.animateProperty({
-                                            node: passwordNode,
-                                            onEnd: function(){
-                                                shakeEffectLeft.play();
-                                            },
-                                            properties: {
-                                                marginLeft: {
-                                                    start: 0,
-                                                    end: 20,
-                                                    unit: "px"
-                                                },
-                                                marginRight: {
-                                                  start: 0,
-                                                  end: 20,
-                                                  unit: "px"
-                                                }
-                                            },
-                                            easing: easing.elasticInOut,
-                                            duration: 100
-                                        });
-                                        passwordNode.lastElementChild.style.borderColor = 'red';
-                                        passwordNode.lastElementChild.style.borderWidth = '4px';
-                                        shakeEffectRight.play();
-                                    }
-                                };
-                                // Call the asynchronous xhrPost
-                                var deferred = dojo.xhrPost(xhrArgs);
-                            }
+//                            if (username !== '' && password !== '') {
+//                                var xhrArgs = {
+//                                    url: "/SFG_Tool/services/checkAuthentication",
+//                                    postData: dojo.toJson({username: username, password: password}),
+//                                    handleAs: "text",
+//                                    headers: {
+//                                        "Content-Type": "application/json"
+//                                    },
+//                                    load: function (data) {
+//                                        //Revert border styling
+//                                        var passwordNode = dom.byId("loginPassword");
+//                                        passwordNode.lastElementChild.style.borderColor = 'black';
+//                                        passwordNode.lastElementChild.style.borderWidth = '1px';
+//
+//                                        var jsonCookie = JSON.parse(data);
+//                                        var sessionID = jsonCookie.JSESSIONID;
+//                                        var readOnly = jsonCookie.readOnly;
+//
+//                                        if (readOnly === 'false') {
+////									var loginForm = dom.byId("autoLogin");
+////									loginForm.submit();                                                                
+//                                            setInterval(function () {
+//                                                window.location.href = "/SFG_Tool";
+//                                            }, 500);
+//                                        } else {
+//                                            window.location.href = "/SFG_Tool";
+//                                        }
+//                                    },
+//                                    error: function (error) {
+//                                        // We'll 404 in the demo, but that's okay.  We don't have a 'postIt' service on the
+//                                        // docs server.
+//                                        var passwordNode = dom.byId("loginPassword");
+//                                    
+//                                        var shakeEffectLeft = baseFx.animateProperty({
+//                                            node: passwordNode,
+//                                            properties: {
+//                                                marginLeft: {
+//                                                    start: 20,
+//                                                    end: 0,
+//                                                    unit: "px"
+//                                                },
+//                                                marginRight: {
+//                                                  start: 20,
+//                                                  end: 0,
+//                                                  unit: "px"
+//                                                }
+//                                            },
+//                                            easing: easing.elasticInOut,
+//                                            duration: 100
+//                                        });
+//
+//                                        var shakeEffectRight = baseFx.animateProperty({
+//                                            node: passwordNode,
+//                                            onEnd: function(){
+//                                                shakeEffectLeft.play();
+//                                            },
+//                                            properties: {
+//                                                marginLeft: {
+//                                                    start: 0,
+//                                                    end: 20,
+//                                                    unit: "px"
+//                                                },
+//                                                marginRight: {
+//                                                  start: 0,
+//                                                  end: 20,
+//                                                  unit: "px"
+//                                                }
+//                                            },
+//                                            easing: easing.elasticInOut,
+//                                            duration: 100
+//                                        });
+//                                        passwordNode.lastElementChild.style.borderColor = 'red';
+//                                        passwordNode.lastElementChild.style.borderWidth = '4px';
+//                                        shakeEffectRight.play();
+//                                    }
+//                                };
+//                                // Call the asynchronous xhrPost
+//                                var deferred = dojo.xhrPost(xhrArgs);
+//                            }
                         };
                     }
             );
