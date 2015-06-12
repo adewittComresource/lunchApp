@@ -114,4 +114,3 @@ public class CheckAuthentication {
         return authed;
     }
 }
->>>>>>> 07485f47bd145423fb526e8aa5e8e93f7d88d832
