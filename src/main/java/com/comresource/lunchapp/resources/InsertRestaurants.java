@@ -26,7 +26,7 @@ public class InsertRestaurants {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(Restaurants restaurants) throws Exception {
+    public Response create(Restaurants restaurants, Is_Open isOpen) throws Exception {
         EntityManager entityManager = PersistenceManager.getEntityManager();
         ResponseBuilder builder = null;
         //Create the GUID for the new Restaurant
@@ -54,7 +54,6 @@ public class InsertRestaurants {
             EntityTransaction transactionIsOpen = entityManager.getTransaction();
             transactionIsOpen.begin();
             //Create new instance of IS_OPEN 
-            Is_Open isOpen = new Is_Open();
             //Generate GUID
             final String openId = UUID.randomUUID().toString();
             //Add Values to Is_Open
@@ -73,7 +72,13 @@ public class InsertRestaurants {
             
             entityManager.detach(isOpen);
             
+            builder = Response.ok(isOpen);
+            if (builder == null) {
+                throw new Exception("builder == null");
+            }
             
+            
+          
             
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
