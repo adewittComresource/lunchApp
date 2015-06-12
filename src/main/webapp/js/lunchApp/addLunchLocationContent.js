@@ -149,10 +149,41 @@ define([
                 label: "Create"
             }).placeAt(this.createLocation);
             //Attach a click event to the button
-            on(this.btnCreateLocation, "click", lang.hitch(this, this.insertRestaurant));
+            on(this.btnCreateLocation, "click", lang.hitch(this, this.insertUpdateRestaurant));
+            
 
             lunchApp.addLocationContent = this;
         },
+        inserUpdateRestaurant: function (){
+            if (this.dialogState == "insert"){
+                this.insertRestaurant();
+            }
+            else{
+                console.log("update")
+            }
+        },
+        
+        populateDialog: function(data){
+            
+           this.txtLocationName.set('value',data.name);
+           this.txtLocationCity.set('value',data.city);
+           this.txtLocationState.set('value',data.state);
+           this.txtLocationAddress.set('value',data.address);
+           this.txtLocationZip.set('value',data.zip);
+           this.txtLocationWebsite.set('value',data.website);
+           var test= dijit.byId(mondayCheckbox);
+           this.settingCheckbox(test,data.monday);
+          
+           
+        },
+         settingCheckbox: function(test,checkValue){
+               if(checkValue == 1){
+                   test.checked=true;
+                   }
+                   else{
+                       test.checked=false;
+                   }
+           },
         insertRestaurant: function () {
             var self = this;
 

@@ -44,7 +44,7 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
 
             //dGrid Docs
             //https://github.com/SitePen/dgrid/blob/v0.4.0/doc/components/core-components/OnDemandList-and-OnDemandGrid.md
-            this.grid = new OnDemandGrid({
+            this.grid = new (declare([ OnDemandGrid,Selection]))({
                 id: 'restaurantGrid',
                 collection: restStore,
                 allowTextSelection:true,
@@ -55,8 +55,27 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                 columns: {
                     //Make sure these correspond to a Column in your Dataset 
                     //Only exception is this is not necessary if using the renderCell Property
+                    edit: {
+                        label: 'Edit',
+                        renderCell: function (item, rowIndex, cell) {
+                            //Create the dom node to be used to contain the data
+                            var btn = new Button({
+                                label: "Edit"
+                            });
+                            on(btn, "click", function (evt) {
+                                console.log("click test");
+                                lunchAppGlobal.lunchLocation.populateDialog(lunchAppGlobal.restaurantGrid.currentSelected);
+                                lunchAppGlobal.addLunchRestaurantDialog.show();
+                                
+                            });
+                            return btn.domNode;
+                            
+                            
+                            
+                        }
+                    },
                     name: {
-                        label: "Name",
+                        label: "Name"
                     },
                     address: {
                         label: "Address"
@@ -89,7 +108,7 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                             websiteContainer.target="_blank";
                             //Return the domNode
                             return websiteContainer; 
-                        }
+                        } 
                     }
                 }
             },this.restaurantGridContainer);
@@ -97,6 +116,7 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
             //Attach an event listener to the grid select
             this.grid.on('dgrid-select', function (event) {
                 console.log('grid selected');
+                lunchAppGlobal.restaurantGrid.currentSelected=event.rows[0].data;
             });
             //Attach an event listener to the grid deselect
             this.grid.on('dgrid-deselect', function (event) {
@@ -134,7 +154,7 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
             //Create the rest store to be used for the grid
             //http://dojotoolkit.org/reference-guide/1.10/dojo/store/JsonRest.html
             var restStore = JsonRest({
-                target: "/lunchApp/services/restaurants",
+                target: "/lunchApp/services/restaurantopen",
                 idProperty: 'restaurantId',
                 sortParam: "sortBy"
             });
