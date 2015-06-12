@@ -7,9 +7,10 @@ define([
     "dijit/form/ValidationTextBox",
     "dojox/form/DropDownSelect",
     "dijit/form/Button",
+    "dijit/form/CheckBox",
     "dojo/on",
     "dojo/text!./templates/addLunchLocationContent.html"
-], function (declare,_WidgetBase,_TemplatedMixin,lang,lunchApp,ValidationTextBox,DropDownSelect,Button,on,template) {
+], function (declare,_WidgetBase,_TemplatedMixin,lang,lunchApp,ValidationTextBox,DropDownSelect,Button,CheckBox,on,template) {
     return declare("lunchApp.addLunchLocationContent", [_WidgetBase, _TemplatedMixin], {
         templateString: template,
         constructor: function (args) {
@@ -62,7 +63,71 @@ define([
                 'class': 'textboxWidth',
                 required: false
             }, "text").placeAt(this.lunchLocationWebsite);
-            
+
+            var mondayCheckBox = new CheckBox({
+                id:"mondayCheckbox",
+                name: "dayOfWeekCheckbox",
+                value: 1,
+                checked: false,
+                onChange: function(b){
+                    console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
+                }
+            }).placeAt(this.mondayCheckbox);
+            var tuesdayCheckBox = new CheckBox({
+                id:"tuesdayCheckbox",
+                name: "dayOfWeekCheckbox",
+                value: 1,
+                checked: false,
+                onChange: function(b){
+                    console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
+                }
+            }).placeAt(this.tuesdayCheckbox);
+            var wednesdayCheckBox = new CheckBox({
+                id:"wednesdayCheckbox",
+                name: "dayOfWeekCheckbox",
+                value: 1,
+                checked: false,
+                onChange: function(b){
+                    console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
+                }
+            }).placeAt(this.wednesdayCheckbox);
+            var thursdayCheckBox = new CheckBox({
+                id:"thursdayCheckbox",
+                name: "dayOfWeekCheckbox",
+                value: 1,
+                checked: false,
+                onChange: function(b){
+                    console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
+                }
+            }).placeAt(this.thursdayCheckbox);
+            var fridayCheckBox = new CheckBox({
+                id:"fridayCheckbox",
+                name: "dayOfWeekCheckbox",
+                value: 1,
+                checked: false,
+                onChange: function(b){
+                    console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
+                }
+            }).placeAt(this.fridayCheckbox);
+            var saturdayCheckBox = new CheckBox({
+                id:"saturdayCheckbox",
+                name: "dayOfWeekCheckbox",
+                value: 1,
+                checked: false,
+                onChange: function(b){
+                    console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
+                }
+            }).placeAt(this.saturdayCheckbox);
+            var sundayCheckBox = new CheckBox({
+                id:"sundayCheckbox",
+                name: "dayOfWeekCheckbox",
+                value: 1,
+                checked: false,
+                onChange: function(b){
+                    console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
+                }
+            }).placeAt(this.sundayCheckbox);
+
             //Save button for our form
             //Documentation for this widgets properties and events can be found here
             //https://dojotoolkit.org/api/?qs=1.10/dijit/form/Button
@@ -86,6 +151,15 @@ define([
             var address = this.txtLocationAddress.get('value');
             var zip = this.txtLocationZip.get('value');
             var website = this.txtLocationWebsite.get('value');
+            
+            //Get Days of Week Values
+            var monday = this.getCheckboxValue(mondayCheckbox);
+            var tuesday = this.getCheckboxValue(tuesdayCheckbox);
+            var wednesday = this.getCheckboxValue(wednesdayCheckbox);
+            var thursday = this.getCheckboxValue(thursdayCheckbox);
+            var friday = this.getCheckboxValue(fridayCheckbox);
+            var saturday = this.getCheckboxValue(saturdayCheckbox);
+            var sunday = this.getCheckboxValue(sundayCheckbox);
 
             //Post to create the restaurant
             var xhrArgs = {
@@ -112,6 +186,17 @@ define([
             };
             // Call the asynchronous xhrPost
             var deferred = dojo.xhrPost(xhrArgs);
+        },
+        
+        getCheckboxValue:function(checkboxId){
+            var checkboxValue;
+            var isChecked = dijit.byId(checkboxId).checked;  
+            if(isChecked){
+                checkboxValue = 1;
+            }else{
+                checkboxValue = 0;
+            }
+          return checkboxValue;
         },
         clearDialog: function () {
             //Clear Dialog back to Default 
