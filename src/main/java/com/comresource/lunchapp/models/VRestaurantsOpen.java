@@ -37,19 +37,19 @@ public class VRestaurantsOpen implements Serializable{
     @Column(name = "WEBSITE")
     private String website;
     @Column(name="MONDAY")
-    private int monday;       
+    private Integer monday;       
     @Column(name="TUESDAY")
-    private int tuesday ; 
+    private Integer tuesday ; 
     @Column(name="WEDNESDAY")
-    private int wednesday;
+    private Integer wednesday;
     @Column(name="THURSDAY")
-    private int thursday;
+    private Integer thursday;
     @Column(name="FRIDAY")
-    private int friday;
+    private Integer friday;
     @Column(name="SATURDAY")
-    private    int saturday;     
+    private Integer saturday;     
     @Column(name="SUNDAY")
-    private  int sunday;     
+    private Integer sunday;     
 
     public String getRestaurantId() {
         return restaurantId;
@@ -115,61 +115,62 @@ public class VRestaurantsOpen implements Serializable{
         this.website = website;
     }
 
-    public int getMonday() {
+    public Integer getMonday() {
         return monday;
     }
 
-    public void setMonday(int monday) {
+    public void setMonday(Integer monday) {
         this.monday = monday;
     }
 
-    public int getTuesday() {
+    public Integer getTuesday() {
         return tuesday;
     }
 
-    public void setTuesday(int tuesday) {
+    public void setTuesday(Integer tuesday) {
         this.tuesday = tuesday;
     }
 
-    public int getWednesday() {
+    public Integer getWednesday() {
         return wednesday;
     }
 
-    public void setWednesday(int wednesday) {
+    public void setWednesday(Integer wednesday) {
         this.wednesday = wednesday;
     }
 
-    public int getThursday() {
+    public Integer getThursday() {
         return thursday;
     }
 
-    public void setThursday(int thursday) {
+    public void setThursday(Integer thursday) {
         this.thursday = thursday;
     }
 
-    public int getFriday() {
+    public Integer getFriday() {
         return friday;
     }
 
-    public void setFriday(int friday) {
+    public void setFriday(Integer friday) {
         this.friday = friday;
     }
 
-    public int getSaturday() {
+    public Integer getSaturday() {
         return saturday;
     }
 
-    public void setSaturday(int saturday) {
+    public void setSaturday(Integer saturday) {
         this.saturday = saturday;
     }
 
-    public int getSunday() {
+    public Integer getSunday() {
         return sunday;
     }
 
-    public void setSunday(int sunday) {
+    public void setSunday(Integer sunday) {
         this.sunday = sunday;
     }
+
    
     
     
