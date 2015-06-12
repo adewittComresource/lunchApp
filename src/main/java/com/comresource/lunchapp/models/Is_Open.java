@@ -15,39 +15,40 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "IS_OPEN")
-public class Is_Open {
+public class Is_Open implements Serializable{
     @Id
     @Column(name = "OPEN_ID")
     private String openId;
     @Column(name = "RESTAURANT_ID")
     private String restaurantId;
     @Column(name = "MONDAY")
-    private int monday;
+    private Integer monday;
     @Column(name = "TUESDAY")
-    private int tuesday;
+    private Integer tuesday;
     @Column(name = "WEDNESDAY")
-    private int wednesday;
+    private Integer wednesday;
     @Column(name = "THURSDAY")
-    private int thursday;
+    private Integer thursday;
     @Column(name = "FRIDAY")
-    private int friday;
+    private Integer friday;
     @Column(name = "SATURDAY")
-    private int saturday;
+    private Integer saturday;
     @Column(name = "SUNDAY")
-    private int sunday;
+    private Integer sunday;
 
     
-       public void update(String openId, String restaurantId, int monday, int tuesday, int wednesday, int thursday, int friday, int saturday, int sunday) {
-        this.openId = openId;
-        this.restaurantId = restaurantId;
-        this.monday = monday;
-        this.tuesday = tuesday;
-        this.wednesday = wednesday;
-        this.thursday = thursday;
-        this.friday=friday;
-        this.saturday=saturday;
-        this.sunday=sunday;
+       public void update(String openId, String restaurantId, Integer monday, Integer tuesday, Integer wednesday, Integer thursday, Integer friday, Integer saturday, Integer sunday) {
+           this.setOpenId(openId);
+           this.setRestaurantId(restaurantId);
+           this.setMonday(monday);
+           this.setTuesday(tuesday);
+           this.setWednesday(wednesday);
+           this.setThursday(thursday);
+           this.setFriday(friday);
+           this.setSaturday(saturday);
+           this.setSunday(sunday);
     }
+
     /**
      * @return the openId
      */
@@ -79,100 +80,101 @@ public class Is_Open {
     /**
      * @return the monday
      */
-    public int getMonday() {
+    public Integer getMonday() {
         return monday;
     }
 
     /**
      * @param monday the monday to set
      */
-    public void setMonday(int monday) {
+    public void setMonday(Integer monday) {
         this.monday = monday;
     }
 
     /**
      * @return the tuesday
      */
-    public int getTuesday() {
+    public Integer getTuesday() {
         return tuesday;
     }
 
     /**
      * @param tuesday the tuesday to set
      */
-    public void setTuesday(int tuesday) {
+    public void setTuesday(Integer tuesday) {
         this.tuesday = tuesday;
     }
 
     /**
      * @return the wednesday
      */
-    public int getWednesday() {
+    public Integer getWednesday() {
         return wednesday;
     }
 
     /**
      * @param wednesday the wednesday to set
      */
-    public void setWednesday(int wednesday) {
+    public void setWednesday(Integer wednesday) {
         this.wednesday = wednesday;
     }
 
     /**
      * @return the thursday
      */
-    public int getThursday() {
+    public Integer getThursday() {
         return thursday;
     }
 
     /**
      * @param thursday the thursday to set
      */
-    public void setThursday(int thursday) {
+    public void setThursday(Integer thursday) {
         this.thursday = thursday;
     }
 
     /**
      * @return the friday
      */
-    public int getFriday() {
+    public Integer getFriday() {
         return friday;
     }
 
     /**
      * @param friday the friday to set
      */
-    public void setFriday(int friday) {
+    public void setFriday(Integer friday) {
         this.friday = friday;
     }
 
     /**
      * @return the saturday
      */
-    public int getSaturday() {
+    public Integer getSaturday() {
         return saturday;
     }
 
     /**
      * @param saturday the saturday to set
      */
-    public void setSaturday(int saturday) {
+    public void setSaturday(Integer saturday) {
         this.saturday = saturday;
     }
 
     /**
      * @return the sunday
      */
-    public int getSunday() {
+    public Integer getSunday() {
         return sunday;
     }
 
     /**
      * @param sunday the sunday to set
      */
-    public void setSunday(int sunday) {
+    public void setSunday(Integer sunday) {
         this.sunday = sunday;
     }
+   
 
      
 }
