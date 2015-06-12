@@ -8,10 +8,11 @@ define([
     "dojox/form/DropDownSelect",
     "dijit/form/Button",
     "dijit/form/CheckBox",
+    "dojo/dom",
     "dojo/on",
     "dojo/text!./templates/addLunchLocationContent.html"
 
-], function (declare,_WidgetBase,_TemplatedMixin,lang,lunchApp,ValidationTextBox,DropDownSelect,Button,CheckBox,on,template) {
+], function (declare,_WidgetBase,_TemplatedMixin,lang,lunchApp,ValidationTextBox,DropDownSelect,Button,CheckBox,dom,on,template) {
     return declare("lunchApp.addLunchLocationContent", [_WidgetBase, _TemplatedMixin], {
         templateString: template,
         constructor: function (args) {
@@ -74,8 +75,8 @@ define([
             }, "text").placeAt(this.lunchLocationWebsite);
 
 
-            var mondayCheckBox = new CheckBox({
-                id:"mondayCheckbox",
+            this.mondayCheckBoxWidget = new CheckBox({
+                id:"mondayCheckboxContainer",
                 name: "dayOfWeekCheckbox",
                 value: 1,
                 checked: false,
@@ -83,8 +84,8 @@ define([
                     console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
                 }
             }).placeAt(this.mondayCheckbox);
-            var tuesdayCheckBox = new CheckBox({
-                id:"tuesdayCheckbox",
+            this.tuesdayCheckBox = new CheckBox({
+                id:"tuesdayCheckboxContainer",
                 name: "dayOfWeekCheckbox",
                 value: 1,
                 checked: false,
@@ -92,8 +93,8 @@ define([
                     console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
                 }
             }).placeAt(this.tuesdayCheckbox);
-            var wednesdayCheckBox = new CheckBox({
-                id:"wednesdayCheckbox",
+            this.wednesdayCheckBox = new CheckBox({
+                id:"wednesdayCheckboxContainer",
                 name: "dayOfWeekCheckbox",
                 value: 1,
                 checked: false,
@@ -101,8 +102,8 @@ define([
                     console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
                 }
             }).placeAt(this.wednesdayCheckbox);
-            var thursdayCheckBox = new CheckBox({
-                id:"thursdayCheckbox",
+            this.thursdayCheckBox = new CheckBox({
+                id:"thursdayCheckboxContainer",
                 name: "dayOfWeekCheckbox",
                 value: 1,
                 checked: false,
@@ -110,8 +111,8 @@ define([
                     console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
                 }
             }).placeAt(this.thursdayCheckbox);
-            var fridayCheckBox = new CheckBox({
-                id:"fridayCheckbox",
+            this.fridayCheckBox = new CheckBox({
+                id:"fridayCheckboxContainer",
                 name: "dayOfWeekCheckbox",
                 value: 1,
                 checked: false,
@@ -119,8 +120,8 @@ define([
                     console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
                 }
             }).placeAt(this.fridayCheckbox);
-            var saturdayCheckBox = new CheckBox({
-                id:"saturdayCheckbox",
+            this.saturdayCheckBox = new CheckBox({
+                id:"saturdayCheckboxContainer",
                 name: "dayOfWeekCheckbox",
                 value: 1,
                 checked: false,
@@ -128,8 +129,8 @@ define([
                     console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
                 }
             }).placeAt(this.saturdayCheckbox);
-            var sundayCheckBox = new CheckBox({
-                id:"sundayCheckbox",
+            this.sundayCheckBox = new CheckBox({
+                id:"sundayCheckboxContainer",
                 name: "dayOfWeekCheckbox",
                 value: 1,
                 checked: false,
@@ -165,25 +166,25 @@ define([
         
         populateDialog: function(data){
             
-           this.txtLocationName.set('value',data.name);
-           this.txtLocationCity.set('value',data.city);
-           this.txtLocationState.set('value',data.state);
-           this.txtLocationAddress.set('value',data.address);
-           this.txtLocationZip.set('value',data.zip);
-           this.txtLocationWebsite.set('value',data.website);
-           var test= dijit.byId(mondayCheckbox);
-           this.settingCheckbox(test,data.monday);
+            this.txtLocationName.set('value',data.name);
+            this.txtLocationCity.set('value',data.city);
+            this.txtLocationState.set('value',data.state);
+            this.txtLocationAddress.set('value',data.address);
+            this.txtLocationZip.set('value',data.zip);
+            this.txtLocationWebsite.set('value',data.website);
+            
+            var monday = dijit.byId("mondayCheckboxContainer");
+            this.settingCheckbox(monday,data.monday);
           
            
         },
-         settingCheckbox: function(test,checkValue){
-               if(checkValue == 1){
-                   test.checked=true;
-                   }
-                   else{
-                       test.checked=false;
-                   }
-           },
+         settingCheckbox: function(widget,checkValue){
+            if(checkValue == 1){
+                widget.set('checked',true);
+            }else{
+                widget.set('checked',true);
+            }
+        },
         insertRestaurant: function () {
             var self = this;
 

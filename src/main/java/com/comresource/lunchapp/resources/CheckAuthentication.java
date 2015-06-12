@@ -30,7 +30,7 @@ import net.sf.json.JSONSerializer;
 @Path("/checkAuthentication")
 public class CheckAuthentication {
     String BASE_WEBSERVER = "http://localhost";
-    String BASE_PORT = "8080";
+    String BASE_PORT = "8084";
     private static Client client;
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
