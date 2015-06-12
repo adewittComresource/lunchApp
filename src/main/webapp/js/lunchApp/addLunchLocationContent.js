@@ -182,7 +182,18 @@ define([
                     state: state,
                     address: address,
                     zip: zip,
-                    website: website
+                    website: website,
+                    monday : monday,
+                    tuesday : tuesday,
+                    wednesday : wednesday,
+                    thursday : thursday,
+                    friday : friday,
+                    saturday : saturday,
+                    sunday : sunday
+                    
+                    
+                    
+                    
                 }),
                 handleAs: "json",
                 headers: {
