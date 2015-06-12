@@ -10,6 +10,7 @@ define([
     "dijit/form/CheckBox",
     "dojo/on",
     "dojo/text!./templates/addLunchLocationContent.html"
+
 ], function (declare,_WidgetBase,_TemplatedMixin,lang,lunchApp,ValidationTextBox,DropDownSelect,Button,CheckBox,on,template) {
     return declare("lunchApp.addLunchLocationContent", [_WidgetBase, _TemplatedMixin], {
         templateString: template,
@@ -27,42 +28,51 @@ define([
             //https://dojotoolkit.org/api/?qs=1.10/dijit/form/ValidationTextBox
             this.txtLocationName = new ValidationTextBox({
                 'class': 'textboxWidth',
+                regExp: ".+",
                 required: true
             }, "text").placeAt(this.lunchLocationName);
-            
+
             //Location name Textbox
             this.txtLocationCity = new ValidationTextBox({
                 'class': 'textboxWidth',
-                value:"Columbus",
+                value: "Columbus",
+                regExp: ".+",
                 required: true
             }, "text").placeAt(this.lunchLocationCity);
-            
+
             //Location State Textbox
             //Disabled this textbox because odds are you are not leaving Ohio for lunch
             this.txtLocationState = new ValidationTextBox({
                 'class': 'textboxWidth',
-                disabled:true,
-                value:"OH",
+//                disabled:true,
+                maxLength: "2",
+                regExp: "[a-zA-Z]{2}",
+                value: "OH",
                 required: true
             }, "text").placeAt(this.lunchLocationState);
-            
+
             //Location Address Textbox
             this.txtLocationAddress = new ValidationTextBox({
                 'class': 'textboxWidth',
+                regExp: ".+",
                 required: true
             }, "text").placeAt(this.lunchLocationAddresss);
-            
+
             //Location Zip Textbox
             this.txtLocationZip = new ValidationTextBox({
                 'class': 'textboxWidth',
+                regExp: "[\\d]{5}",
                 required: true
             }, "text").placeAt(this.lunchLocationZip);
-            
+
             //Location Website Textbox
             this.txtLocationWebsite = new ValidationTextBox({
                 'class': 'textboxWidth',
+                regExp: "(http:\\/\\/|https:\\/\\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?",
                 required: false
+
             }, "text").placeAt(this.lunchLocationWebsite);
+
 
             var mondayCheckBox = new CheckBox({
                 id:"mondayCheckbox",
@@ -128,6 +138,8 @@ define([
                 }
             }).placeAt(this.sundayCheckbox);
 
+
+
             //Save button for our form
             //Documentation for this widgets properties and events can be found here
             //https://dojotoolkit.org/api/?qs=1.10/dijit/form/Button
@@ -143,7 +155,7 @@ define([
         },
         insertRestaurant: function () {
             var self = this;
-            
+
             //Get the input values into variables
             var name = this.txtLocationName.get('value');
             var city = this.txtLocationCity.get('value');
