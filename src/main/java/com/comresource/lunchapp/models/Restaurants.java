@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "RESTAURANTS")
 public class Restaurants implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "RESTAURANT_ID")
     private String restaurantId;
