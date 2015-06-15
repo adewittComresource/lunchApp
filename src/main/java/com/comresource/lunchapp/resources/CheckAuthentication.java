@@ -26,6 +26,8 @@ import javax.ws.rs.core.MultivaluedMap;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+import org.apache.commons.codec.digest.DigestUtils;
+
 
 @Path("/checkAuthentication")
 public class CheckAuthentication {
@@ -87,7 +89,10 @@ public class CheckAuthentication {
             String serverUsername = userObject.getString("userName");
             String serverPassword = userObject.getString("password");
             
-            if(serverUsername.equals(loginUserName) && serverPassword.equals(clientPassword)){
+            //check the user entered password and username with server's hash password
+            boolean checkHashResult = checkHashPassword(serverPassword, loginUserName, clientPassword);
+           
+            if(checkHashResult){
                 session.setAttribute("authenticated", "true");
                 return "passed";
             }
@@ -112,5 +117,16 @@ public class CheckAuthentication {
             authed = "true";
         }
         return authed;
+    }
+    
+    public boolean checkHashPassword(String serverPasswordHash, String clientLoginUserName, String clientLoginPassword){
+       
+        //hash user entered password and username
+        String clientSalt = DigestUtils.sha256Hex(clientLoginUserName);     
+        String clientLoginPasswordHash = DigestUtils.sha256Hex(clientLoginPassword + clientSalt);
+        
+        //return true if server's password hash is equal to user entered password hash
+        return serverPasswordHash.equals(clientLoginPasswordHash);
+        
     }
 }
