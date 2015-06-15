@@ -15,7 +15,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "IS_OPEN")
-public class Is_Open implements Serializable{
+public class Is_Open implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "OPEN_ID")
     private String openId;
@@ -36,17 +38,16 @@ public class Is_Open implements Serializable{
     @Column(name = "SUNDAY")
     private Integer sunday;
 
-    
-       public void update(String openId, String restaurantId, Integer monday, Integer tuesday, Integer wednesday, Integer thursday, Integer friday, Integer saturday, Integer sunday) {
-           this.setOpenId(openId);
-           this.setRestaurantId(restaurantId);
-           this.setMonday(monday);
-           this.setTuesday(tuesday);
-           this.setWednesday(wednesday);
-           this.setThursday(thursday);
-           this.setFriday(friday);
-           this.setSaturday(saturday);
-           this.setSunday(sunday);
+    public void update(String openId, String restaurantId, Integer monday, Integer tuesday, Integer wednesday, Integer thursday, Integer friday, Integer saturday, Integer sunday) {
+        this.setOpenId(openId);
+        this.setRestaurantId(restaurantId);
+        this.setMonday(monday);
+        this.setTuesday(tuesday);
+        this.setWednesday(wednesday);
+        this.setThursday(thursday);
+        this.setFriday(friday);
+        this.setSaturday(saturday);
+        this.setSunday(sunday);
     }
 
     /**
@@ -174,7 +175,5 @@ public class Is_Open implements Serializable{
     public void setSunday(Integer sunday) {
         this.sunday = sunday;
     }
-   
 
-     
 }

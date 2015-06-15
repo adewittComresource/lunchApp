@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.comresource.lunchapp.models;
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,45 +18,31 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "V_RESTAURANT_PROFILE")
 public class VRestaurantProfile implements Serializable {
-     private static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    /**
-     * @param aSerialVersionUID the serialVersionUID to set
-     */
-    public static void setSerialVersionUID(long aSerialVersionUID) {
-        serialVersionUID = aSerialVersionUID;
-    }
-     
-     @Id
-     @Column(name = "RESTAURANT_PROFILE_ID")
-     private String restaurantProfileId;
-     @Column(name="RESTAURANT_ID")
-     private String restaurantId;
-     @Column(name = "USER_ID")
-     private String userId;
-     @Column(name = "RESTAURANT_NAME")
-     private String restaurantName;
-     @Column(name = "USER_NAME")
-     private String userName;
-     @Column(name = "TIME_FACTOR")
-     private float timeFactor;
-     @Column(name = "COST_FACTOR")
-     private float costFactor;
-     @Column(name = "POST_LUNCH_FULLNESS_FACTOR")
-     private float postLunchFullnessFactor;
-     @Column(name="DELICIOUSNESS_FACTOR")
-     private float deliciousnessFactor;       
-     @Column(name="POST_LUNCH_DISCOMFORT_FACTOR")
-     private float postLunchDiscomfortFactor ; 
-     @Column(name="OPT_IN")
-     private Integer optIn;
+    @Id
+    @Column(name = "RESTAURANT_PROFILE_ID")
+    private String restaurantProfileId;
+    @Column(name = "RESTAURANT_ID")
+    private String restaurantId;
+    @Column(name = "USER_ID")
+    private String userId;
+    @Column(name = "RESTAURANT_NAME")
+    private String restaurantName;
+    @Column(name = "USER_NAME")
+    private String userName;
+    @Column(name = "TIME_FACTOR")
+    private float timeFactor;
+    @Column(name = "COST_FACTOR")
+    private float costFactor;
+    @Column(name = "POST_LUNCH_FULLNESS_FACTOR")
+    private float postLunchFullnessFactor;
+    @Column(name = "DELICIOUSNESS_FACTOR")
+    private float deliciousnessFactor;
+    @Column(name = "POST_LUNCH_DISCOMFORT_FACTOR")
+    private float postLunchDiscomfortFactor;
+    @Column(name = "OPT_IN")
+    private Integer optIn;
 
     /**
      * @return the restaurantProfileId
@@ -210,7 +197,5 @@ public class VRestaurantProfile implements Serializable {
     public void setOptIn(Integer optIn) {
         this.optIn = optIn;
     }
-     
-     
-     
+
 }
