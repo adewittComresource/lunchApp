@@ -27,10 +27,10 @@
 
 <html>
     <head>
-<!--        <link rel="shortcut icon" type="image/png" href="media/favicon.png"/>-->
         <title>Login</title>
         <link rel="stylesheet" href="js/dijit/themes/claro/claro.css" />
         <link rel="stylesheet" href="css/style.css" />
+        <link rel="shortcut icon" type="image/ico" href="media/favicon.ico" />
         <style>
             body{
                 height: 100%;
