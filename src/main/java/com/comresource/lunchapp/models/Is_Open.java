@@ -124,5 +124,9 @@ public class Is_Open implements Serializable {
            this.setSunday(sunday);
        }
 
+    public void update(String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }

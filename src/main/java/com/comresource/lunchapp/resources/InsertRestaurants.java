@@ -91,8 +91,9 @@ public class InsertRestaurants {
             isOpen.setThursday(Integer.parseInt(thursday));
             isOpen.setFriday(Integer.parseInt(friday));
             isOpen.setSaturday(Integer.parseInt(saturday));
-            isOpen.setMonday(Integer.parseInt(monday));
             isOpen.setSunday(Integer.parseInt(sunday));
+            isOpen.setMonday(Integer.parseInt(monday));
+            
            
             entityManager.persist(isOpen);
             

@@ -28,6 +28,7 @@ public class UpdateRestaurants {
         ResponseBuilder builder = null;
         //Change the string to a json Object that we can use to extract the values
         JSONObject restaurantJSON = (JSONObject) JSONSerializer.toJSON(restaurantData);
+        
 
         final String restaurantId = (String) restaurantJSON.get("restaurantId");
         String name = restaurantJSON.getString("name");
@@ -36,26 +37,30 @@ public class UpdateRestaurants {
         String address = restaurantJSON.getString("address");
         String zip = restaurantJSON.getString("zip");
         String website = restaurantJSON.getString("website");
+        final String openId = (String) restaurantJSON.get("openId");
+         
+         Integer monday = restaurantJSON.getInt("monday");
+         Integer tuesday = restaurantJSON.getInt("tuesday");
+         Integer wednesday = restaurantJSON.getInt("wednesday");
+         Integer thursday = restaurantJSON.getInt("thursday");
+         Integer friday = restaurantJSON.getInt("friday");
+         Integer saturday = restaurantJSON.getInt("saturday");
+         Integer sunday = restaurantJSON.getInt("sunday");
+         
         
-        String monday = restaurantJSON.getString("monday");
-            String tuesday = restaurantJSON.getString("tuesday");
-            String wednesday = restaurantJSON.getString("wednesday");
-            String thursday = restaurantJSON.getString("thursday");
-            String friday = restaurantJSON.getString("friday");
-            String saturday = restaurantJSON.getString("saturday");
-            String sunday = restaurantJSON.getString("sunday");
-            
+      
 
         try {
             entityManager.getTransaction().begin();
             // Find the File in the database
             Restaurants found = entityManager.find(Restaurants.class, restaurantId);
+            
             if (found == null) {
                 throw new PersistenceException("Restaurant with key: " + restaurantId + " not found.");
             }
             // Copy the new value to the existing set
             found.update(name, city, state, address, zip, website);
-            found.update(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
+          
 
             // Persist it
             entityManager.persist(found);
@@ -63,6 +68,33 @@ public class UpdateRestaurants {
             entityManager.detach(found);
 
             builder = Response.ok(found);
+            if (builder == null) {
+                throw new Exception("builder == null");
+            }
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        }
+        
+         try {
+            entityManager.getTransaction().begin();
+            // Find the File in the database
+            Is_Open got = entityManager.find(Is_Open.class, openId);
+            
+            if (got == null) {
+                throw new PersistenceException("openId: " + openId + " not got/found.");
+            }
+            // Copy the new value to the existing set
+          got.update(monday,tuesday,wednesday,thursday,friday,saturday,sunday);
+          
+
+            // Persist it
+            entityManager.persist(got);
+            entityManager.getTransaction().commit();
+            entityManager.detach(got);
+
+            builder = Response.ok(got);
             if (builder == null) {
                 throw new Exception("builder == null");
             }
@@ -79,4 +111,6 @@ public class UpdateRestaurants {
         cacheControl.setNoCache(true);
         return builder.cacheControl(cacheControl).build();
     }
+    
+    
 }

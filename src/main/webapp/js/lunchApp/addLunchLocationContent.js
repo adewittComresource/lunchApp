@@ -177,6 +177,7 @@ define([
 
             //Get the input values into variables
             var restaurantId = lunchAppGlobal.restaurantGrid.currentSelected.restaurantId;
+            var openId = lunchAppGlobal.restaurantGrid.currentSelected.openId;
             var name = this.txtLocationName.get('value');
             var city = this.txtLocationCity.get('value');
             var state = this.txtLocationState.get('value');
@@ -198,6 +199,7 @@ define([
                 url: "/lunchApp/services/updateRestaurant/",
                 postData: dojo.toJson({
                     restaurantId : restaurantId,
+                    openId: openId,
                     name: name,
                     city: city,
                     state: state,
@@ -222,7 +224,7 @@ define([
                 },
                 load: function (data) {
                     //DO Stuff after the POST is finished
-                    lunchAppGlobal.main.addLunchLocationDialog.hide();
+                    lunchAppGlobal.addLunchRestaurantDialog.hide();
                 },
                 error: function (error) {
                     //POST ERROR
