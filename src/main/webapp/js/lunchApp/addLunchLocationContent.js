@@ -225,6 +225,7 @@ define([
                 load: function (data) {
                     //DO Stuff after the POST is finished
                     lunchAppGlobal.addLunchRestaurantDialog.hide();
+                     lunchAppGlobal.restaurantGrid.grid.refresh();
                 },
                 error: function (error) {
                     //POST ERROR
