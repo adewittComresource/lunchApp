@@ -25,9 +25,9 @@ define([
     "dojo/on",
     "./addLunchLocationContent",
     "./restaurantGrid",
-    
+     "./restaurantProfileGrid",
     'dojo/domReady!'
-], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid) {
+], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid) {
     var lunchApp = {};
     
     // Main Container
@@ -61,10 +61,11 @@ define([
         restaurantContentWidget.grid.resize();
     });
     
+    var restaurantProfileContentWidget = restaurantProfileGrid({ parent: this });
     //Restaurant Profiles
     var restaurantProfilePane = new ContentPane({
         title: "Restaurant Profiles",
-        content: "Setup of Restaurant Profiles here."
+        content: restaurantProfileContentWidget
     });
     mainTabContainer.addChild(restaurantProfilePane);
 
