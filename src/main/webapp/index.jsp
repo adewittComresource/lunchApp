@@ -14,6 +14,7 @@
         <!-- Application-specific CSS should be stored in your application?s package to ensure portability and to allow
              the build system to combine & minify it. -->
         <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" type="image/ico" href="media/favicon.ico" />
     </head>
     <!-- The claro class configures the theme for the application --> 
     <!--http://dojotoolkit.org/reference-guide/1.10/dijit/themes.html-->
