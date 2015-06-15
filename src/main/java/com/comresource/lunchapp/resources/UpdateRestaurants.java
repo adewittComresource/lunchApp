@@ -2,6 +2,7 @@ package com.comresource.lunchapp.resources;
 
 import com.comresource.lunchapp.PersistenceManager;
 import com.comresource.lunchapp.models.Restaurants;
+import com.comresource.lunchapp.models.Is_Open;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.ws.rs.Consumes;
@@ -35,6 +36,15 @@ public class UpdateRestaurants {
         String address = restaurantJSON.getString("address");
         String zip = restaurantJSON.getString("zip");
         String website = restaurantJSON.getString("website");
+        
+        String monday = restaurantJSON.getString("monday");
+            String tuesday = restaurantJSON.getString("tuesday");
+            String wednesday = restaurantJSON.getString("wednesday");
+            String thursday = restaurantJSON.getString("thursday");
+            String friday = restaurantJSON.getString("friday");
+            String saturday = restaurantJSON.getString("saturday");
+            String sunday = restaurantJSON.getString("sunday");
+            
 
         try {
             entityManager.getTransaction().begin();
@@ -45,6 +55,7 @@ public class UpdateRestaurants {
             }
             // Copy the new value to the existing set
             found.update(name, city, state, address, zip, website);
+            found.update(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
 
             // Persist it
             entityManager.persist(found);

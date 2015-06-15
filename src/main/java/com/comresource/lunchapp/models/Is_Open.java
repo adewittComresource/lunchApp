@@ -37,9 +37,8 @@ public class Is_Open implements Serializable{
     private Integer sunday;
 
     
-       public void update(String openId, String restaurantId, Integer monday, Integer tuesday, Integer wednesday, Integer thursday, Integer friday, Integer saturday, Integer sunday) {
-           this.setOpenId(openId);
-           this.setRestaurantId(restaurantId);
+       public void update( Integer monday, Integer tuesday, Integer wednesday, Integer thursday, Integer friday, Integer saturday, Integer sunday) {
+           
            this.setMonday(monday);
            this.setTuesday(tuesday);
            this.setWednesday(wednesday);
@@ -174,6 +173,8 @@ public class Is_Open implements Serializable{
     public void setSunday(Integer sunday) {
         this.sunday = sunday;
     }
+
+   
    
 
      
