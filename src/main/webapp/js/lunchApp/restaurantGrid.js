@@ -69,10 +69,7 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                                 lunchAppGlobal.addLunchRestaurantDialog.show();
                                 
                             });
-                            return btn.domNode;
-                            
-                            
-                            
+                            return btn.domNode;     
                         }
                     },
                     name: {

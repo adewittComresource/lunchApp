@@ -41,8 +41,6 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                 sortParam: "sortBy"
             });
 
-            //dGrid Docs
-            //https://github.com/SitePen/dgrid/blob/v0.4.0/doc/components/core-components/OnDemandList-and-OnDemandGrid.md
             this.grid = new OnDemandGrid({
                 id: 'restaurantProfileId',
                 collection: restStore,
@@ -65,8 +63,13 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                     },
                     postLunchFullnessFactor: {
                         label: 'Post Lunch Fullness Factor'
+                    },
+                    deliciousnessFactor: {
+                        label: 'Deliciousness Factor'
+                    },
+                    postLunchDiscomfortFactor: {
+                        label: 'Post Lunch Discomfort Factor'
                     }
-                    
                 }
             },this.restaurantProfileGridContainer);
             
@@ -87,7 +90,7 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
             //If you do not call this then the widget will not show up
             this.grid.startup();
             //Populate Grid
-           // this.populateGrid();
+            this.populateGrid();
             
             //Save button for our form
             //Documentation for this widgets properties and events can be found here

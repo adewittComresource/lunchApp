@@ -68,7 +68,11 @@ define([
         content: restaurantProfileContentWidget
     });
     mainTabContainer.addChild(restaurantProfilePane);
-
+    
+    on(restaurantProfilePane, "show", function(){
+    restaurantProfileContentWidget.grid.resize();
+    });
+    
     //Call this to create the widget in the DOM
     mainContainer.addChild(mainTabContainer);
     
