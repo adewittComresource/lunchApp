@@ -26,6 +26,7 @@ define([
             }
         },
         buildRendering: function () {
+            var self = this;
             this.inherited(arguments);
             lunchAppGlobal.lunchRestaurantProfile = this;
             
@@ -37,37 +38,69 @@ define([
             this.restaurantDropdown = FilteringSelect({
                 id: "restaurantDropdown",
                 store: new ObjectStore({objectStore: dropdownRestStore}),
-                autoComplete: true,
-                searchAttr: "name",
-                onChange: function () {
-                }
+//                autoComplete: true,
+                searchAttr: "name"
             }).placeAt(this.restaurantDropdownContainer);
-            
-//            this.lunchTimeFactor = new ValidationTextBox({
-//                'class': 'textboxWidth',
-//                value: "Columbus",
-//                regExp: ".+",
-//                required: true
-//            }, "text").placeAt(this.lunchLocationCity);
-            
-              parser.parse();
-              this.lunchTimeFactor = new HorizontalSlider({
-                name: "slider",
+
+             
+                this.lunchTimeFactorSlider = new HorizontalSlider({
                 value: 5,
                 minimum: 0,
                 maximum: 10,
                 intermediateChanges: true,
                 style: "width:300px;",
                 onChange: function (value) {
-                    dom.byId("sliderValue").value = value;
+                    self.lunchTimeFactor.innerHTML = value;
                 }
-                },"slider").placeAt(this.timeFactorDropdownContainer);
-           
+                }).placeAt(this.timeFactorDropdownContainer);
+                
+                
+                this.lunchCostFactorSlider = new HorizontalSlider({
+                value: 5,
+                minimum: 0,
+                maximum: 10,
+                intermediateChanges: true,
+                style: "width:300px;",
+                onChange: function (value) {
+                    self.lunchCostFactor.innerHTML = value;
+                }
+                }).placeAt(this.costFactorDropdownContainer);
+                
+                
+            this.lunchFullnessFactorSlider = new HorizontalSlider({
+                value: 5,
+                minimum: 0,
+                maximum: 10,
+                intermediateChanges: true,
+                style: "width:300px;",
+                onChange: function (value) {
+                    self.lunchFullnessFactor.innerHTML = value;
+                }
+            }).placeAt(this.fullnessDropdownContainer);
+            
+            this.lunchDeliciousnessFactorSlider = new HorizontalSlider({
+                value: 5,
+                minimum: 0,
+                maximum: 10,
+                intermediateChanges: true,
+                style: "width:300px;",
+                onChange: function (value) {
+                    self.lunchDeliciousnessFactor.innerHTML = value;
+                }
+            }).placeAt(this.deliciousnessDropdownContainer);
+            
+            this.lunchDiscomfortFactorSlider = new HorizontalSlider({
+                value: 5,
+                minimum: 0,
+                maximum: 10,
+                intermediateChanges: true,
+                style: "width:300px;",
+                onChange: function (value) {
+                    self.lunchDiscomfortFactor.innerHTML = value;
+                }
+            }).placeAt(this.discomfortDropdownContainer);
 
-            
-            
-            
-            this.btnCreateLocation = Button({
+                this.btnCreateLocation = Button({
                 id: "createProfileButton",
                 name: "createProfile",
                 label: "Create"
