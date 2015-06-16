@@ -25,8 +25,10 @@ define([
     "dojo/on",
     "./addLunchLocationContent",
     "./restaurantGrid",
-     "./restaurantProfileGrid",
+    "./restaurantProfileGrid",
+    "./addRestaurantProfileContent",
     'dojo/domReady!'
+    
 ], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent) {
     var lunchApp = {};
     
@@ -78,50 +80,6 @@ define([
     
     mainTabContainer.startup();
 //    mainTabContainer.selectTab(suggestionPane);
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     //Lunch Location Content
     var lunchLocationWidget = addLunchLocationContent({ parent: this });
     //Add Dialog for Creating New Lunch Location
