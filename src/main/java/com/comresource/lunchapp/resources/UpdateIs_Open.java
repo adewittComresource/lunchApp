@@ -47,7 +47,7 @@ public class UpdateIs_Open {
                 throw new PersistenceException("openId: " + openId + " not found.");
             }
             // Copy the new value to the existing set
-           found.update(openId, restaurantId,monday,tuesday,wednesday,thursday,friday,saturday,sunday);
+           found.update(monday,tuesday,wednesday,thursday,friday,saturday,sunday);
 
             // Persist it
             entityManager.persist(found);

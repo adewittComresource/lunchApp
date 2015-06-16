@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.ws.rs.HEAD;
 
 /**
  *
@@ -38,142 +39,94 @@ public class Is_Open implements Serializable {
     @Column(name = "SUNDAY")
     private Integer sunday;
 
-    public void update(String openId, String restaurantId, Integer monday, Integer tuesday, Integer wednesday, Integer thursday, Integer friday, Integer saturday, Integer sunday) {
-        this.setOpenId(openId);
-        this.setRestaurantId(restaurantId);
-        this.setMonday(monday);
-        this.setTuesday(tuesday);
-        this.setWednesday(wednesday);
-        this.setThursday(thursday);
-        this.setFriday(friday);
-        this.setSaturday(saturday);
-        this.setSunday(sunday);
-    }
-
-    /**
-     * @return the openId
-     */
     public String getOpenId() {
         return openId;
     }
 
-    /**
-     * @param openId the openId to set
-     */
     public void setOpenId(String openId) {
         this.openId = openId;
     }
 
-    /**
-     * @return the restaurantId
-     */
     public String getRestaurantId() {
         return restaurantId;
     }
 
-    /**
-     * @param restaurantId the restaurantId to set
-     */
     public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
     }
 
-    /**
-     * @return the monday
-     */
     public Integer getMonday() {
         return monday;
     }
 
-    /**
-     * @param monday the monday to set
-     */
     public void setMonday(Integer monday) {
         this.monday = monday;
     }
 
-    /**
-     * @return the tuesday
-     */
     public Integer getTuesday() {
         return tuesday;
     }
 
-    /**
-     * @param tuesday the tuesday to set
-     */
     public void setTuesday(Integer tuesday) {
         this.tuesday = tuesday;
     }
 
-    /**
-     * @return the wednesday
-     */
     public Integer getWednesday() {
         return wednesday;
     }
 
-    /**
-     * @param wednesday the wednesday to set
-     */
     public void setWednesday(Integer wednesday) {
         this.wednesday = wednesday;
     }
 
-    /**
-     * @return the thursday
-     */
     public Integer getThursday() {
         return thursday;
     }
 
-    /**
-     * @param thursday the thursday to set
-     */
     public void setThursday(Integer thursday) {
         this.thursday = thursday;
     }
 
-    /**
-     * @return the friday
-     */
     public Integer getFriday() {
         return friday;
     }
 
-    /**
-     * @param friday the friday to set
-     */
     public void setFriday(Integer friday) {
         this.friday = friday;
     }
 
-    /**
-     * @return the saturday
-     */
     public Integer getSaturday() {
         return saturday;
     }
 
-    /**
-     * @param saturday the saturday to set
-     */
     public void setSaturday(Integer saturday) {
         this.saturday = saturday;
     }
 
-    /**
-     * @return the sunday
-     */
     public Integer getSunday() {
         return sunday;
     }
 
-    /**
-     * @param sunday the sunday to set
-     */
     public void setSunday(Integer sunday) {
         this.sunday = sunday;
     }
+
+
+    
+       public void update( Integer monday, Integer tuesday, Integer wednesday, Integer thursday, Integer friday, Integer saturday, Integer sunday) {
+           
+           this.setMonday(monday);
+           this.setTuesday(tuesday);
+           this.setWednesday(wednesday);
+           this.setThursday(thursday);
+           this.setFriday(friday);
+           this.setSaturday(saturday);
+           this.setSunday(sunday);
+       }
+
+    public void update(String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }

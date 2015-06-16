@@ -64,7 +64,8 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                             });
                             on(btn, "click", function (evt) {
                                 console.log("click test");
-                                 btnCreateNewRestaurant.lunchLocation.set('label', "")
+                                // btnCreateNewRestaurant.lunchLocation.set('label', "Update");
+                                lunchAppGlobal.lunchLocation.btnCreateLocation.set('label', "Update");
                                 lunchAppGlobal.lunchLocation.populateDialog(lunchAppGlobal.restaurantGrid.currentSelected);
                                 lunchAppGlobal.addLunchRestaurantDialog.show();
                                 

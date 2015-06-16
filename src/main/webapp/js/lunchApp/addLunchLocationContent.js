@@ -139,8 +139,6 @@ define([
                 }
             }).placeAt(this.sundayCheckbox);
 
-
-
             //Save button for our form
             //Documentation for this widgets properties and events can be found here
             //https://dojotoolkit.org/api/?qs=1.10/dijit/form/Button
@@ -155,29 +153,83 @@ define([
 
             lunchApp.addLocationContent = this;
         },
-        inserUpdateRestaurant: function (){
+        
+        insertUpdateRestaurant: function (){
             if (this.dialogState == "insert"){
                 this.insertRestaurant();
             }
             else{
-                console.log("update")
-            }
+                console.log("update");
+                
+                this.updateRestaurant();
+
+          
+          
+           }
         },
         
-        populateDialog: function(data){
+        updateRestaurant : function (){
+                  var self = this;
+            //Get the input values into variables
+            var restaurantId = lunchAppGlobal.restaurantGrid.currentSelected.restaurantId;
+            var openId = lunchAppGlobal.restaurantGrid.currentSelected.openId;
+            var name = this.txtLocationName.get('value');
+            var city = this.txtLocationCity.get('value');
+            var state = this.txtLocationState.get('value');
+            var address = this.txtLocationAddress.get('value');
+            var zip = this.txtLocationZip.get('value');
+            var website = this.txtLocationWebsite.get('value');
             
-            this.txtLocationName.set('value',data.name);
-            this.txtLocationCity.set('value',data.city);
-            this.txtLocationState.set('value',data.state);
-            this.txtLocationAddress.set('value',data.address);
-            this.txtLocationZip.set('value',data.zip);
-            this.txtLocationWebsite.set('value',data.website);
-            
-            var monday = dijit.byId("mondayCheckboxContainer");
-            this.settingCheckbox(monday,data.monday);
-          
-           
+            //Get Days of Week Values
+            var monday = this.getCheckboxValue(mondayCheckboxContainer);
+            var tuesday = this.getCheckboxValue(tuesdayCheckboxContainer);
+            var wednesday = this.getCheckboxValue(wednesdayCheckboxContainer);
+            var thursday = this.getCheckboxValue(thursdayCheckboxContainer);
+            var friday = this.getCheckboxValue(fridayCheckboxContainer);
+            var saturday = this.getCheckboxValue(saturdayCheckboxContainer);
+            var sunday = this.getCheckboxValue(sundayCheckboxContainer);
+
+            //Post to create the restaurant
+            var xhrArgs = {
+                url: "/lunchApp/services/updateRestaurant/",
+                postData: dojo.toJson({
+                    restaurantId : restaurantId,
+                    openId: openId,
+                    name: name,
+                    city: city,
+                    state: state,
+                    address: address,
+                    zip: zip,
+                    website: website,
+                    monday : monday,
+                    tuesday : tuesday,
+                    wednesday : wednesday,
+                    thursday : thursday,
+                    friday : friday,
+                    saturday : saturday,
+                    sunday : sunday
+                    
+                    
+                    
+                    
+                }),
+                handleAs: "json",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                load: function (data) {
+                    //DO Stuff after the POST is finished
+                    lunchAppGlobal.addLunchRestaurantDialog.hide();
+                     lunchAppGlobal.restaurantGrid.grid.refresh();
+                },
+                error: function (error) {
+                    //POST ERROR
+                }
+            };
+            // Call the asynchronous xhrPost
+            var deferred = dojo.xhrPost(xhrArgs);
         },
+
         
         settingCheckbox: function(widget,checkValue){
             if(checkValue == 1){
@@ -224,10 +276,6 @@ define([
                     friday : friday,
                     saturday : saturday,
                     sunday : sunday
-                    
-                    
-                    
-                    
                 }),
                 handleAs: "json",
                 headers: {
@@ -244,6 +292,39 @@ define([
             // Call the asynchronous xhrPost
             var deferred = dojo.xhrPost(xhrArgs);
         },
+        
+        populateDialog: function(data){
+            
+            this.txtLocationName.set('value',data.name);
+            this.txtLocationCity.set('value',data.city);
+            this.txtLocationState.set('value',data.state);
+            this.txtLocationAddress.set('value',data.address);
+            this.txtLocationZip.set('value',data.zip);
+            this.txtLocationWebsite.set('value',data.website);
+            
+            var monday = dijit.byId("mondayCheckboxContainer");
+            this.settingCheckbox(monday,data.monday);
+            var tuesday = dijit.byId("tuesdayCheckboxContainer");
+            this.settingCheckbox(tuesday,data.tuesday);
+            var wednesday = dijit.byId("wednesdayCheckboxContainer");
+            this.settingCheckbox(wednesday,data.wednesday);
+            var thursday = dijit.byId("thursdayCheckboxContainer");
+            this.settingCheckbox(thursday,data.thursday);
+            var friday = dijit.byId("fridayCheckboxContainer");
+            this.settingCheckbox(friday,data.friday);
+            var saturday = dijit.byId("saturdayCheckboxContainer");
+            this.settingCheckbox(saturday,data.saturday);
+            var sunday = dijit.byId("sundayCheckboxContainer");
+            this.settingCheckbox(sunday,data.sunday);
+        },
+            
+            settingCheckbox: function(widget,checkValue){
+                if(checkValue == 1){
+                widget.set('checked',true);
+                }else{
+                widget.set('checked',false);
+              }
+            },
         
         getCheckboxValue:function(checkboxId){
             var checkboxValue;
