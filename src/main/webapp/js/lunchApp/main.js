@@ -25,10 +25,18 @@ define([
     "dojo/on",
     "./addLunchLocationContent",
     "./restaurantGrid",
+<<<<<<< HEAD
      "./restaurantProfileGrid",
      "dijit/form/Button",
     'dojo/domReady!'
 ], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid, Button) {
+=======
+    "./restaurantProfileGrid",
+    "./addRestaurantProfileContent",
+    'dojo/domReady!'
+    
+], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent) {
+>>>>>>> origin/master
     var lunchApp = {};
     
     // Main Container
@@ -139,7 +147,6 @@ define([
     mainTabContainer.startup();
     logoutpane.startup();
 //    mainTabContainer.selectTab(suggestionPane);
-    
     //Lunch Location Content
     var lunchLocationWidget = addLunchLocationContent({ parent: this });
     //Add Dialog for Creating New Lunch Location
@@ -154,7 +161,55 @@ define([
     // It is important to remember to always call startup on widgets
     // It will not hurt if you do it twice, but things will often not work right if you forget to do it
     addLunchLocationDialog.startup();
-
+    
+    //Lunch Restaurant Profile Content
+    var restaurantProfileWidget = addRestaurantProfileContent({ parent: this });
+    //Add Dialog for creating new restaurant profile
+    var addLunchProfileDialog = new Dialog({
+        id: "addRestaurantProfile",
+        title: "Add Restaurant Profile",
+        content:restaurantProfileWidget,
+        style: "width: 50%;font-size:18px;text-align:center;"
+    });
+    lunchAppGlobal.addLunchRestaurantProfileDialog = addLunchProfileDialog;
+    addLunchProfileDialog.startup();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Returning a value from an AMD module means that it becomes the value of the module. In this case, we return
     // the app object, which means that other parts of the application that require app/main could get a reference
     // to the dialog

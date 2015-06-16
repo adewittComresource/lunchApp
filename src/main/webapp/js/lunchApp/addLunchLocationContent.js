@@ -139,8 +139,6 @@ define([
                 }
             }).placeAt(this.sundayCheckbox);
 
-
-
             //Save button for our form
             //Documentation for this widgets properties and events can be found here
             //https://dojotoolkit.org/api/?qs=1.10/dijit/form/Button
@@ -155,6 +153,7 @@ define([
 
             lunchApp.addLocationContent = this;
         },
+        
         insertUpdateRestaurant: function (){
             if (this.dialogState == "insert"){
                 this.insertRestaurant();
@@ -171,10 +170,6 @@ define([
         
         updateRestaurant : function (){
                   var self = this;
-                  
-                  
-            
-
             //Get the input values into variables
             var restaurantId = lunchAppGlobal.restaurantGrid.currentSelected.restaurantId;
             var openId = lunchAppGlobal.restaurantGrid.currentSelected.openId;
@@ -234,7 +229,16 @@ define([
             // Call the asynchronous xhrPost
             var deferred = dojo.xhrPost(xhrArgs);
         },
-                
+
+        
+        settingCheckbox: function(widget,checkValue){
+            if(checkValue == 1){
+                widget.set('checked',true);
+            }else{
+                widget.set('checked',true);
+            }
+        },
+        
         insertRestaurant: function () {
             var self = this;
 
@@ -272,10 +276,6 @@ define([
                     friday : friday,
                     saturday : saturday,
                     sunday : sunday
-                    
-                    
-                    
-                    
                 }),
                 handleAs: "json",
                 headers: {

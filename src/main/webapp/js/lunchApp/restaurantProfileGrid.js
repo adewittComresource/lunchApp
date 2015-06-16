@@ -97,16 +97,16 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
             //https://dojotoolkit.org/api/?qs=1.10/dijit/form/Button
             this.btnCreateNewRestaurant = Button({
                 id: "createNewRestaurantProfileButton",
-                name: "createRestaurant",
-                label: "Add New"
+                name: "createRestaurantProfile",
+                label: "Add New Profile"
             }).placeAt(this.restaurantProfileGridFooter);
             //Attach a click event to the button
-            on(this.btnCreateNewRestaurant, "click", lang.hitch(this, this.showCreateRestaurant));
+            on(this.btnCreateNewRestaurant, "click", lang.hitch(this, this.showCreateRestaurantProfile));
         },
         
-        showCreateRestaurant:function(){
+        showCreateRestaurantProfile:function(){
             //Show the dialog so the user can create a new Restaurant
-            lunchAppGlobal.addLunchRestaurantDialog.show();
+            lunchAppGlobal.addLunchRestaurantProfileDialog.show();
         },
         
         populateGrid: function () {
