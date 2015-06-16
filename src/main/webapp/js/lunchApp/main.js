@@ -25,18 +25,13 @@ define([
     "dojo/on",
     "./addLunchLocationContent",
     "./restaurantGrid",
-<<<<<<< HEAD
-     "./restaurantProfileGrid",
-     "dijit/form/Button",
-    'dojo/domReady!'
-], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid, Button) {
-=======
     "./restaurantProfileGrid",
     "./addRestaurantProfileContent",
+     "dijit/form/Button",
     'dojo/domReady!'
     
-], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent) {
->>>>>>> origin/master
+], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent, Button) {
+
     var lunchApp = {};
     
     // Main Container
@@ -54,29 +49,9 @@ define([
     var logoutpane = new ContentPane({
         
         title:"LogoutButton",
-        id : "logoutButtonId",
-        content: "Hello"   
+        id : "logoutButtonId",  
     });
     
-//    var afterLogout = function (){            
-//        //Post to create the restaurant
-//        var xhrArgs = {
-//          url: "/lunchApp/services/logoutuser",                
-//          handleAs: "json",
-//          headers: {
-//              "Content-Type": "application/json"
-//          },
-//          load: function (data) {
-//              //DO Stuff after the POST is finished
-//               location.reload();
-//               console.log("successfully logged out");
-//          },
-//          error: function (error) {
-//              //POST ERROR
-//          }
-//      };            // Call the asynchronous xhrPost
-//      var deferred = dojo.xhrPost(xhrArgs);
-//    };
     
     var btnLogout = Button({
                 id: "LunchAppLogout1",
