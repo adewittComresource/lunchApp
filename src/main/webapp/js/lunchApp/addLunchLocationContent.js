@@ -178,13 +178,15 @@ define([
           
            
         },
-         settingCheckbox: function(widget,checkValue){
+        
+        settingCheckbox: function(widget,checkValue){
             if(checkValue == 1){
                 widget.set('checked',true);
             }else{
                 widget.set('checked',true);
             }
         },
+        
         insertRestaurant: function () {
             var self = this;
 
