@@ -1,5 +1,6 @@
 package com.comresource.lunchapp.resources;
 
+
 import com.comresource.lunchapp.PersistenceManager;
 import com.comresource.lunchapp.models.Users;
 import java.io.IOException;
@@ -22,9 +23,13 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/checkAuthentication")
 public class CheckAuthentication {
+    
+    final static Logger log = LoggerFactory.getLogger(CheckAuthentication.class);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -47,6 +52,7 @@ public class CheckAuthentication {
 
             if (loginUserName != null) {
                 authResult = Authentication(loginUserName, clientPassword, session, httpResponse);
+                log.info("storing authentication result in authResult");
             } else {
                 //redirect to index page
                 RequestDispatcher page = httpRequest.getRequestDispatcher("loginPage.jsp");
@@ -54,6 +60,7 @@ public class CheckAuthentication {
             }
         }
         return authResult;
+        
     }
 
     public String Authentication(String loginUserName, String clientPassword, HttpSession session, HttpServletResponse httpResponse) throws Exception {
@@ -67,6 +74,7 @@ public class CheckAuthentication {
         if (results != null && !results.isEmpty()) {
             // disconnect the entity manager
             entityManager.detach(results);
+            log.info("checking for authentication");
 
             // get the row from the DB and turn it into the User object
             Users userObj = (Users) results.get(0);
@@ -75,6 +83,7 @@ public class CheckAuthentication {
             if (checkHashResult) {
                 session.setAttribute("authenticated", "true");
                 return "passed";
+                
             }
         }
         return "failed";
@@ -95,7 +104,7 @@ public class CheckAuthentication {
     }
 
     public boolean checkHashPassword(String serverPasswordHash, String clientLoginUserName, String clientLoginPassword) {
-
+            log.info("in CheckHashPassword function");
         //hash user entered password and username
         String clientSalt = DigestUtils.sha256Hex(clientLoginUserName);
         String clientLoginPasswordHash = DigestUtils.sha256Hex(clientLoginPassword + clientSalt);

@@ -17,6 +17,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -24,6 +26,10 @@ import javax.ws.rs.core.Response;
  */
 @Path("/insertUsers")
 public class InsertUsers {
+    
+        final static Logger log = LoggerFactory.getLogger(InsertUsers.class);
+
+    
     //POST METHOD
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -55,6 +61,7 @@ public class InsertUsers {
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
+                log.error(e.getMessage());
             }
         }
         CacheControl cacheControl = new CacheControl();

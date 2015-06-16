@@ -17,12 +17,17 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  *
  * @author Jason
  */
 @Path("/users")
 public class ReadUser {
+    
+                    final static Logger log = LoggerFactory.getLogger(ReadUser.class);
+
         
       @GET
       @Produces(MediaType.APPLICATION_JSON)

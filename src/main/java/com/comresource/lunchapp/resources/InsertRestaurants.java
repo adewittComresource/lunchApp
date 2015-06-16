@@ -19,9 +19,15 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/insertRestaurants")
 public class InsertRestaurants {
+    
+    final static Logger log = LoggerFactory.getLogger(InsertRestaurants.class);
+    
+    
     //POST METHOD
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -106,6 +112,7 @@ public class InsertRestaurants {
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
+                log.error(e.getMessage());
             }
         }
         CacheControl cacheControl = new CacheControl();

@@ -15,9 +15,14 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/updateRestaurant")
 public class UpdateRestaurants {
+    
+                    final static Logger log = LoggerFactory.getLogger(UpdateRestaurants.class);
+
 
     //Insert into Database
     @POST
@@ -48,7 +53,7 @@ public class UpdateRestaurants {
          Integer sunday = restaurantJSON.getInt("sunday");
          
         
-      
+      log.info("in update restaurants class");
 
         try {
             entityManager.getTransaction().begin();
@@ -74,6 +79,8 @@ public class UpdateRestaurants {
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
+                log.info("just updating name,city,state,address,zip and website");
+                log.error(e.getMessage());
             }
         }
         
@@ -101,6 +108,8 @@ public class UpdateRestaurants {
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
+                log.error("updating checkboxes");
+                log.error(e.getMessage());
             }
         }
 

@@ -16,12 +16,18 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  *
  * @author Jason
  */
 @Path("/updateIs_Open")
 public class UpdateIs_Open {
+    
+                final static Logger log = LoggerFactory.getLogger(UpdateIs_Open.class);
+
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -61,6 +67,7 @@ public class UpdateIs_Open {
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
+                log.error(e.getMessage());
             }
         }
          

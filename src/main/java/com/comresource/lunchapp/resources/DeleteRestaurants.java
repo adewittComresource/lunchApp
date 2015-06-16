@@ -14,9 +14,14 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/deleteRestaurants")
 public class DeleteRestaurants {
+    
+         final static Logger log = LoggerFactory.getLogger(DeleteRestaurants.class);
+
 
     //Delete From Database
     @POST
@@ -47,6 +52,7 @@ public class DeleteRestaurants {
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
+                log.error(e.getMessage());
             }
         }
 

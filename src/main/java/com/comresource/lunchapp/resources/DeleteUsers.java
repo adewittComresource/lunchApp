@@ -18,6 +18,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -25,6 +27,10 @@ import net.sf.json.JSONSerializer;
  */
 @Path("/deleteUsers")
 public class DeleteUsers {
+    
+             final static Logger log = LoggerFactory.getLogger(DeleteUsers.class);
+
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -53,6 +59,7 @@ public class DeleteUsers {
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
+                log.error(e.getMessage());
             }
         }
 

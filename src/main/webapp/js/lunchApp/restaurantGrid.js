@@ -26,6 +26,8 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                 this._parent = args.parent;
             }
         },
+        
+        
         buildRendering: function () {
             this.inherited(arguments);
             this.containerNode = this.domNode;
@@ -142,7 +144,41 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
             }).placeAt(this.restaurantGridFooter);
             //Attach a click event to the button
             on(this.btnCreateNewRestaurant, "click", lang.hitch(this, this.showCreateRestaurant));
+        
+        this.btnLogout = Button({
+                id: "LunchAppLogout",
+                name: "LunchAppLogout",
+                label: "Logout"
+            }).placeAt(this.restaurantGridFooter);
+            //Attach a click event to the button
+            on(this.btnLogout, "click", lang.hitch(this, this.afterLogout));
         },
+        
+        afterLogout : function(){
+            
+              //Post to create the restaurant
+            var xhrArgs = {
+                url: "/lunchApp/services/logoutuser",
+                
+                handleAs: "json",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                load: function (data) {
+                    //DO Stuff after the POST is finished
+                     location.reload();
+                },
+                error: function (error) {
+                    //POST ERROR
+                }
+            };
+            // Call the asynchronous xhrPost
+            var deferred = dojo.xhrPost(xhrArgs);
+        
+            
+           
+        },
+        
         
         showCreateRestaurant:function(){
             //Show the dialog so the user can create a new Restaurant

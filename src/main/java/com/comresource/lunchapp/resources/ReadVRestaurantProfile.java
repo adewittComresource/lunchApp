@@ -16,6 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -23,6 +25,9 @@ import org.hibernate.Session;
  */
 @Path("/vreadrestaurantprofile")
 public class ReadVRestaurantProfile {
+    
+        final static Logger log = LoggerFactory.getLogger(ReadVRestaurantProfile.class);
+
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -37,7 +42,9 @@ public class ReadVRestaurantProfile {
         }
         builder = Response.ok(results);
         if (builder == null) {
+             
             throw new Exception("builder == null");
+           
         }
         CacheControl cacheControl = new CacheControl();
         cacheControl.setNoCache(true);

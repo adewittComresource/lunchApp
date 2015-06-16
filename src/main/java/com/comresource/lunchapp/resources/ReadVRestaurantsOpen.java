@@ -17,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -27,6 +29,9 @@ import org.hibernate.Session;
 // http://docs.oracle.com/cd/E19776-01/820-4867/6nga7f5nc/index.html
 @Path("/restaurantopen")
 public class ReadVRestaurantsOpen {
+    
+            final static Logger log = LoggerFactory.getLogger(ReadVRestaurantsOpen.class);
+
     
      //REST Resource Method Annotation
     //https://jersey.java.net/documentation/latest/jaxrs-resources.html

@@ -19,9 +19,13 @@ import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/insertRestaurantProfiles")
 public class InsertRestaurantProfiles {
+    
+    final static Logger log = LoggerFactory.getLogger(InsertRestaurantProfiles.class);
     //POST METHOD
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -53,6 +57,7 @@ public class InsertRestaurantProfiles {
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
+                log.error(e.getMessage());
             }
         }
         CacheControl cacheControl = new CacheControl();

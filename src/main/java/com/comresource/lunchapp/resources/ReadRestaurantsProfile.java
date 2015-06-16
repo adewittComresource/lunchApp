@@ -17,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -24,6 +26,8 @@ import org.hibernate.Session;
  */
 @Path("/restaurantprofile")
 public class ReadRestaurantsProfile {
+    
+                final static Logger log = LoggerFactory.getLogger(ReadRestaurantsProfile.class);
     
     
     // DOcs on Path annotation

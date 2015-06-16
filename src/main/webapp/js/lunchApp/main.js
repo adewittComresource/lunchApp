@@ -26,8 +26,9 @@ define([
     "./addLunchLocationContent",
     "./restaurantGrid",
      "./restaurantProfileGrid",
+     "dijit/form/Button",
     'dojo/domReady!'
-], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid) {
+], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid, Button) {
     var lunchApp = {};
     
     // Main Container
@@ -42,6 +43,65 @@ define([
         useSlider: false
     });
     
+    var logoutpane = new ContentPane({
+        
+        title:"LogoutButton",
+        id : "logoutButtonId",
+        content: "Hello"   
+    });
+    
+//    var afterLogout = function (){            
+//        //Post to create the restaurant
+//        var xhrArgs = {
+//          url: "/lunchApp/services/logoutuser",                
+//          handleAs: "json",
+//          headers: {
+//              "Content-Type": "application/json"
+//          },
+//          load: function (data) {
+//              //DO Stuff after the POST is finished
+//               location.reload();
+//               console.log("successfully logged out");
+//          },
+//          error: function (error) {
+//              //POST ERROR
+//          }
+//      };            // Call the asynchronous xhrPost
+//      var deferred = dojo.xhrPost(xhrArgs);
+//    };
+    
+    var btnLogout = Button({
+                id: "LunchAppLogout1",
+                name: "LunchAppLogout",
+                label: "Logout"
+            }).placeAt(logoutpane.domNode);
+            //Attach a click event to the button
+    on(btnLogout, "click", function (){            
+        //Post to create the restaurant
+        var xhrArgs = {
+          url: "/lunchApp/services/logoutuser",                
+          handleAs: "json",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          load: function (data) {
+              //DO Stuff after the POST is finished
+               location.reload();
+               console.log("successfully logged out");
+          },
+          error: function (error) {
+              //POST ERROR
+          }
+      };            // Call the asynchronous xhrPost
+      var deferred = dojo.xhrPost(xhrArgs);
+    });
+        
+       
+        
+        
+        
+          
+    mainContainer.addChild(logoutpane);
     //Lunch Suggestions
     var suggestionPane = new ContentPane({
         title: "Suggestions",
@@ -77,6 +137,7 @@ define([
     mainContainer.addChild(mainTabContainer);
     
     mainTabContainer.startup();
+    logoutpane.startup();
 //    mainTabContainer.selectTab(suggestionPane);
     
     //Lunch Location Content
