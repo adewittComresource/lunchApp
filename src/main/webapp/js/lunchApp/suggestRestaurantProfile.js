@@ -17,23 +17,27 @@ define([
 ], function (declare,template,_ContentPaneResizeMixin,_TemplatedMixin,JsonRest,Memory,
 ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Selection) {
 
-    return declare("lunchApp.suggestRestaurantProfile", [_WidgetBase, _TemplatedMixin, _ContentPaneResizeMixin], {
+//need to add restaurant info, map, graph
 
+
+    return declare("lunchApp.suggestRestaurantProfile", [_WidgetBase,
+        _TemplatedMixin, _ContentPaneResizeMixin], {
         templateString: template,
         constructor: function (args) {
             if (args.parent) {
                 this._parent = args.parent;
             }
+            if (args.restaurantName) {
+                this.restaurantName = args.restaurantName;
+            }
+            if (args.data) {
+                this.data = args.data;
+            }
         },
+        
         buildRendering: function () {
             this.inherited(arguments);
             this.containerNode = this.domNode;
-            //This gives us access to this widget from the console
-            //having access to this variable makes it much easier to debug your widgets
-            //This variable can also be easily used to call this widget from other widgets methods
-            lunchAppGlobal.suggestRestaurantProfile = this;
-
-            
         },
         startup: function () {
             this.inherited(arguments);
