@@ -27,14 +27,17 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
             if (args.parent) {
                 this._parent = args.parent;
             }
+            if (args.restaurantName) {
+                this.restaurantName = args.restaurantName;
+            }
+            if (args.data) {
+                this.data = args.data;
+            }
         },
         
         buildRendering: function () {
             this.inherited(arguments);
             this.containerNode = this.domNode;
-           
-
-            
         },
         startup: function () {
             this.inherited(arguments);

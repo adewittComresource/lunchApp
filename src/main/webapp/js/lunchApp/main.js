@@ -27,9 +27,10 @@ define([
     "./restaurantGrid",
     "./restaurantProfileGrid",
     "./addRestaurantProfileContent",
+    "./suggestRestaurantContainer",
     "dijit/form/Button",
     'dojo/domReady!'    
-], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,Button) {
+], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,suggestRestaurantContainer,Button) {
     var lunchApp = {};
     
     // Main Container
@@ -79,10 +80,11 @@ define([
         
         mainContainer.addChild(logoutpane);
         
+    var suggestionWidget = suggestRestaurantContainer({ parent: this });
     //Lunch Suggestions
     var suggestionPane = new ContentPane({
         title: "Suggestions",
-        content: "Put Lunch Suggestions Here"
+        content: suggestionWidget
     });
     mainTabContainer.addChild(suggestionPane);
 
