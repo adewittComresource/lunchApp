@@ -42,12 +42,6 @@ define([
 //                autoComplete: true,
                 searchAttr: "name"
             }).placeAt(this.restaurantDropdownContainer);
-            
-            this.txtuserId = new ValidationTextBox({
-                'class': 'textboxWidth',
-                regExp: ".+",
-                required: true
-            }, "text").placeAt(this.lunchUserIdContainer);
              
                 this.lunchTimeFactorSlider = new HorizontalSlider({
                 value: 5,
@@ -105,7 +99,18 @@ define([
                     self.lunchDiscomfortFactor.innerHTML = value;
                 }
             }).placeAt(this.discomfortDropdownContainer);
-
+            
+              this.optInCheckBoxWidget = new CheckBox({
+                id:"optInContainer",
+                name: "optInCheckbox",
+                value: 1,
+                checked: false,
+                onChange: function(b){
+                    console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
+                }
+            }).placeAt(this.optInCheckbox);
+            
+            
                 this.btnCreateLocation = Button({
                 id: "createProfileButton",
                 name: "createProfile",
