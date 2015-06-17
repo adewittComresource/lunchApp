@@ -28,10 +28,11 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                 this._parent = args.parent;
             }
         },
+        
         buildRendering: function () {
             this.inherited(arguments);
             this.containerNode = this.domNode;
-            lunchAppGlobal.suggestRestaurantProfile = this;
+           
 
             
         },
