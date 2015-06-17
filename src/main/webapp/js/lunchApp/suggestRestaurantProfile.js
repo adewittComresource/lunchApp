@@ -20,8 +20,8 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
 //need to add restaurant info, map, graph
 
 
-    return declare("lunchApp.suggestRestaurantProfile", [_WidgetBase, _TemplatedMixin, _ContentPaneResizeMixin], {
-
+    return declare("lunchApp.suggestRestaurantProfile", [_WidgetBase,
+        _TemplatedMixin, _ContentPaneResizeMixin], {
         templateString: template,
         constructor: function (args) {
             if (args.parent) {
