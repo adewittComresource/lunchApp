@@ -82,6 +82,7 @@ public class CheckAuthentication {
             boolean checkHashResult = checkHashPassword(serverPassword, loginUserName, clientPassword);
             if (checkHashResult) {
                 session.setAttribute("authenticated", "true");
+                session.setAttribute("userName", loginUserName);
                 return "passed";
                 
             }
@@ -112,4 +113,5 @@ public class CheckAuthentication {
         //return true if server's password hash is equal to user entered password hash
         return serverPasswordHash.equals(clientLoginPasswordHash);
     }
+    
 }

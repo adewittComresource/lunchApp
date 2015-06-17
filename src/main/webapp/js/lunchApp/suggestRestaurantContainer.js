@@ -13,9 +13,12 @@ define([
     "dgrid/extensions/DijitRegistry",
     "dgrid/OnDemandGrid",
     'dgrid/extensions/Pagination',
-    'dgrid/Selection'
+    'dgrid/Selection',
+    "./suggestRestaurantProfile"
 ], function (declare, template, _ContentPaneResizeMixin, _TemplatedMixin, JsonRest, Memory,
-        ObjectStore, _WidgetBase, Button, on, lang, DijitRegistry, OnDemandGrid, Pagination, Selection) {
+        ObjectStore, _WidgetBase, Button, on, lang, DijitRegistry, OnDemandGrid, Pagination, Selection,suggestRestaurantProfile) {
+
+//need to have it load the profile for each of the 3 profiles
 
     return declare("lunchApp.suggestRestaurantContainer", [_WidgetBase, _TemplatedMixin, _ContentPaneResizeMixin], {
         templateString: template,
@@ -27,11 +30,11 @@ define([
         buildRendering: function () {
             this.inherited(arguments);
             this.containerNode = this.domNode;
-            //This gives us access to this widget from the console
-            //having access to this variable makes it much easier to debug your widgets
-            //This variable can also be easily used to call this widget from other widgets methods
             lunchAppGlobal.suggestRestaurantProfile = this;
-             var xhrArgs = {
+            //we need to reference this in the AJAX call
+            var self = this;
+            
+            var xhrArgs = {
                 url: "/lunchApp/services/restaurantgraphinfo",
                 handleAs: "json",
                 headers: {
@@ -39,20 +42,19 @@ define([
                 },
                 load: function (data) {
                     //DO Stuff after the POST is finished
-                   for (var i=0; i>data.length+1; i++){
-                       
-                       console.log(data[i]);
-                       
-                       
-                   }
+                    for (var i = 0; i < data.length; i++) {
+                        //Get the current row of data
+                        var currentRow = data[i];
+                        //Create new instance of the widget and pass in values it will need
+                        var profileWidget = suggestRestaurantProfile({ parent: this,restaurantName:currentRow.restaurantName,data:currentRow });
+                        //Place your new widget in the container
+                        profileWidget.placeAt(self.restaurantSuggestionContainer);
+                    }
                 },
                 error: function (error) {
-                    //POST ERROR
                 }
             };
-            // Call the asynchronous xhrPost
             var deferred = dojo.xhrGet(xhrArgs);
-
         },
         startup: function () {
             this.inherited(arguments);

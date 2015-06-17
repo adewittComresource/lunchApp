@@ -22,6 +22,8 @@ define([
 ], function (declare, template, _ContentPaneResizeMixin, _TemplatedMixin, JsonRest, Memory,
         ObjectStore, _WidgetBase, Button, on, lang, DijitRegistry, OnDemandGrid, Pagination, Selection, Chart, Default, Default, Spider, Base) {
 
+//need to get it to load the user rating and average rating into chart
+
     return declare("lunchApp.restaurantRadarGraph", [_WidgetBase, _TemplatedMixin, _ContentPaneResizeMixin], {
         templateString: template,
         testVar: "testing123",
@@ -66,8 +68,7 @@ define([
                     "Content-Type": "application/json"
                 },
                 load: function (data) {
-                    //testing using console
-                    console.log('umm not sure what is going on here');
+                                       console.log('umm not sure what is going on here');
                 },
                 error: function (error) {
                     //POST ERROR
@@ -80,30 +81,6 @@ define([
             var partnerLength = data.length;
             var xSeries = [];
             var partnerSeries = [];
-//       for (var i = 0; i < partnerLength; i++) {
-//            var xSeriesObject = {};
-//            var yObject = {};
-//            var xText = data[i].x;
-//            var xValue = data[i].y;
-//
-//            xObject.value = i + 1;
-//            xObject.text = xText;
-//
-//            yObject.y = parseInt(xValue);
-//            yObject.legend = xText;
-//            yObject.tooltip = xValue;
-//
-//            partnerSeries.push(yObject);
-//            xAxis.push(xObject);
-//        }
-//        // Add series
-//        this.Chart.addSeries("x", { 
-//            labels: series,
-//            minorTicks: false
-//        });
-//        //this.partnerChart.addSeries("partner");
-//        this.Chart.addSeries("y", { vertical: true, fixLower: "micro", fixUpper: "micro" });
-//        this.pieChart.addSeries("Series A", partnerSeries);        
             this.chart.addSeries("min", {data: data[0]}, {fill: "blue"});
             this.chart.addSeries("max", {data: data[1]}, {fill: "blue"});
             this.chart.addSeries("testing", {data: data[2]}, {fill: "blue"});
@@ -112,13 +89,12 @@ define([
             this.pieChart.resize('50%', '50%');
             this.chart.removeSeries("min");
             this.chart.removeSeries("max");
-            //Hide chart standby after everything is loaded
+           
             this.chartStandby.hide();
         },
         startup: function () {
             this.inherited(arguments);
         }
-
     });
 });
 
