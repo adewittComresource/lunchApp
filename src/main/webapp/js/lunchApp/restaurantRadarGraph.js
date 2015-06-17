@@ -31,16 +31,14 @@ define([
             if (args.parent) {
                 this._parent = args.parent;
             }
+            if (args.data) {
+                this._data = args.data;
+            }
         },
         buildRendering: function () {
             this.inherited(arguments);
             this.containerNode = this.domNode;
-            lunchAppGlobal.restaurantRadarGraph = this;
-
-        },
-        populateChart: function () {
-            this.chart = new Chart(this.restaurantGraphContainer, {title: 'restaurantChartStuff'});
-
+            this.chart = new Chart(this.restaurantGraphContainer, {title: 'The Chart that broke a thousand Screens'});
             this.chart.addPlot("default", {
                 type: "Spider",
                 labelOffset: -10,
@@ -50,48 +48,51 @@ define([
                 spiderType: "polygon"
             });
 
-            var data = [{"Time": 0, "Cost": 0, "Fullness": 0, "Deliciousness": 0, "Discomfort": 0},
-                {"Time": 100, "Cost": 100, "Fullness": 100, "Deliciousness": 100, "Discomfort": 100},
-                {"Time": 53, "Cost": 26, "Fullness": 25, "Deliciousness": 45, "Discomfort": 55}];
-            this.chart.addSeries("min", {data: data[0]}, {fill: "blue"});
-            this.chart.addSeries("max", {data: data[1]}, {fill: "blue"});
+            var data = this._data
+            
+            this.chart.addSeries("min", {data: data[0]}, {fill: "white"});
+            this.chart.addSeries("max", {data: data[1]}, {fill: "white"});
             this.chart.addSeries("UserReview", {data: data[2]}, {fill: "blue"});
             this.chart.addSeries("AverageReview", {data: data[3]}, {fill: "red"});
             this.chart.render();
             this.chart.removeSeries("min");
             this.chart.removeSeries("max");
 
-            var xhrArg = {
-                url: "/lunchApp/services/restaurantgraphinfo",
-                handleAs: "json",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                load: function (data) {
-                                       console.log('umm not sure what is going on here');
-                },
-                error: function (error) {
-                    //POST ERROR
-                    console.log('error');
-                }
-            };
-            var deferred = dojo.xhrGet(xhrArg);
         },
-        loadChartData: function (data) {
-            var partnerLength = data.length;
-            var xSeries = [];
-            var partnerSeries = [];
-            this.chart.addSeries("min", {data: data[0]}, {fill: "blue"});
-            this.chart.addSeries("max", {data: data[1]}, {fill: "blue"});
-            this.chart.addSeries("testing", {data: data[2]}, {fill: "blue"});
-            this.chart.addSeries("AverageReview", {data: data[3]}, {fill: "red"});
-            this.chart.render();
-            this.pieChart.resize('50%', '50%');
-            this.chart.removeSeries("min");
-            this.chart.removeSeries("max");
-           
-            this.chartStandby.hide();
-        },
+        
+//        populateChart: function () {
+//
+//            var xhrArg = {
+//                url: "/lunchApp/services/restaurantgraphinfo",
+//                handleAs: "json",
+//                headers: {
+//                    "Content-Type": "application/json"
+//                },
+//                load: function (data) {
+//                    console.log('umm not sure what is going on here');
+//                },
+//                error: function (error) {
+//                    //POST ERROR
+//                    console.log('error');
+//                }
+//            };
+//            var deferred = dojo.xhrGet(xhrArg);
+//        },
+//        loadChartData: function (data) {
+//            var partnerLength = data.length;
+//            var xSeries = [];
+//            var partnerSeries = [];
+//            this.chart.addSeries("min", {data: data[0]}, {fill: "blue"});
+//            this.chart.addSeries("max", {data: data[1]}, {fill: "blue"});
+//            this.chart.addSeries("testing", {data: data[2]}, {fill: "blue"});
+//            this.chart.addSeries("AverageReview", {data: data[3]}, {fill: "red"});
+//            this.chart.render();
+//            this.pieChart.resize('50%', '50%');
+//            this.chart.removeSeries("min");
+//            this.chart.removeSeries("max");
+//
+//            this.chartStandby.hide();
+//        },
         startup: function () {
             this.inherited(arguments);
         }
