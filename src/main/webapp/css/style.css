@@ -29,3 +29,9 @@ html,body{
 .sideByside{
     display:inline-block;
 }
+.boxy{
+    float:left;
+    padding-left: 3%;
+    padding-right: 1%;
+    width: 28%;
+}

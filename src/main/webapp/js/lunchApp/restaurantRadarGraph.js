@@ -47,9 +47,7 @@ define([
                 precision: 0,
                 spiderType: "polygon"
             });
-
-            var data = this._data
-            
+            var data = this._data;
             this.chart.addSeries("min", {data: data[0]}, {fill: "white"});
             this.chart.addSeries("max", {data: data[1]}, {fill: "white"});
             this.chart.addSeries("UserReview", {data: data[2]}, {fill: "blue"});
@@ -59,40 +57,6 @@ define([
             this.chart.removeSeries("max");
 
         },
-        
-//        populateChart: function () {
-//
-//            var xhrArg = {
-//                url: "/lunchApp/services/restaurantgraphinfo",
-//                handleAs: "json",
-//                headers: {
-//                    "Content-Type": "application/json"
-//                },
-//                load: function (data) {
-//                    console.log('umm not sure what is going on here');
-//                },
-//                error: function (error) {
-//                    //POST ERROR
-//                    console.log('error');
-//                }
-//            };
-//            var deferred = dojo.xhrGet(xhrArg);
-//        },
-//        loadChartData: function (data) {
-//            var partnerLength = data.length;
-//            var xSeries = [];
-//            var partnerSeries = [];
-//            this.chart.addSeries("min", {data: data[0]}, {fill: "blue"});
-//            this.chart.addSeries("max", {data: data[1]}, {fill: "blue"});
-//            this.chart.addSeries("testing", {data: data[2]}, {fill: "blue"});
-//            this.chart.addSeries("AverageReview", {data: data[3]}, {fill: "red"});
-//            this.chart.render();
-//            this.pieChart.resize('50%', '50%');
-//            this.chart.removeSeries("min");
-//            this.chart.removeSeries("max");
-//
-//            this.chartStandby.hide();
-//        },
         startup: function () {
             this.inherited(arguments);
         }
