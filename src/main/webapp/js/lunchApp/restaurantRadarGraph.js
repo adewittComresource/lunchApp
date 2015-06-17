@@ -80,30 +80,7 @@ define([
             var partnerLength = data.length;
             var xSeries = [];
             var partnerSeries = [];
-//       for (var i = 0; i < partnerLength; i++) {
-//            var xSeriesObject = {};
-//            var yObject = {};
-//            var xText = data[i].x;
-//            var xValue = data[i].y;
-//
-//            xObject.value = i + 1;
-//            xObject.text = xText;
-//
-//            yObject.y = parseInt(xValue);
-//            yObject.legend = xText;
-//            yObject.tooltip = xValue;
-//
-//            partnerSeries.push(yObject);
-//            xAxis.push(xObject);
-//        }
-//        // Add series
-//        this.Chart.addSeries("x", { 
-//            labels: series,
-//            minorTicks: false
-//        });
-//        //this.partnerChart.addSeries("partner");
-//        this.Chart.addSeries("y", { vertical: true, fixLower: "micro", fixUpper: "micro" });
-//        this.pieChart.addSeries("Series A", partnerSeries);        
+
             this.chart.addSeries("min", {data: data[0]}, {fill: "blue"});
             this.chart.addSeries("max", {data: data[1]}, {fill: "blue"});
             this.chart.addSeries("testing", {data: data[2]}, {fill: "blue"});
