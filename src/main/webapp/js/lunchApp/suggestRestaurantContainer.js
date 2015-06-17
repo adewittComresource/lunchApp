@@ -17,6 +17,8 @@ define([
 ], function (declare, template, _ContentPaneResizeMixin, _TemplatedMixin, JsonRest, Memory,
         ObjectStore, _WidgetBase, Button, on, lang, DijitRegistry, OnDemandGrid, Pagination, Selection) {
 
+//need to have it load the profile for each of the 3 profiles
+
     return declare("lunchApp.suggestRestaurantContainer", [_WidgetBase, _TemplatedMixin, _ContentPaneResizeMixin], {
         templateString: template,
         constructor: function (args) {
@@ -27,11 +29,8 @@ define([
         buildRendering: function () {
             this.inherited(arguments);
             this.containerNode = this.domNode;
-            //This gives us access to this widget from the console
-            //having access to this variable makes it much easier to debug your widgets
-            //This variable can also be easily used to call this widget from other widgets methods
             lunchAppGlobal.suggestRestaurantProfile = this;
-             var xhrArgs = {
+            var xhrArgs = {
                 url: "/lunchApp/services/restaurantgraphinfo",
                 handleAs: "json",
                 headers: {
@@ -39,20 +38,14 @@ define([
                 },
                 load: function (data) {
                     //DO Stuff after the POST is finished
-                   for (var i=0; i>data.length+1; i++){
-                       
-                       console.log(data[i]);
-                       
-                       
-                   }
+                    for (var i = 0; i > data.length + 1; i++) {
+                        console.log(data[i]);
+                    }
                 },
                 error: function (error) {
-                    //POST ERROR
                 }
             };
-            // Call the asynchronous xhrPost
             var deferred = dojo.xhrGet(xhrArgs);
-
         },
         startup: function () {
             this.inherited(arguments);

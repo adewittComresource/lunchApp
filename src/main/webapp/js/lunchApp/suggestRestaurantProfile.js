@@ -17,6 +17,9 @@ define([
 ], function (declare,template,_ContentPaneResizeMixin,_TemplatedMixin,JsonRest,Memory,
 ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Selection) {
 
+//need to add restaurant info, map, graph
+
+
     return declare("lunchApp.suggestRestaurantProfile", [_WidgetBase, _TemplatedMixin, _ContentPaneResizeMixin], {
 
         templateString: template,
@@ -28,9 +31,6 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
         buildRendering: function () {
             this.inherited(arguments);
             this.containerNode = this.domNode;
-            //This gives us access to this widget from the console
-            //having access to this variable makes it much easier to debug your widgets
-            //This variable can also be easily used to call this widget from other widgets methods
             lunchAppGlobal.suggestRestaurantProfile = this;
 
             

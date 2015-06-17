@@ -1,10 +1,12 @@
 package com.comresource.lunchapp.models;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="V_SUGGEST_PROFILE")
@@ -22,7 +24,8 @@ public class VSuggestProfile
   @Column(name="RESTAURANT_NAME")
   private String restaurantName;
   @Column(name="SUGGEST_DATE")
-  private String suggestDate;
+  @Type(type="date")
+  private Date suggestDate;
   @Column(name="CITY")
   private String city;
   @Column(name="STATE")
@@ -100,12 +103,12 @@ public class VSuggestProfile
     this.restaurantName = restaurantName;
   }
   
-  public String getSuggestDate()
+  public Date getSuggestDate()
   {
     return this.suggestDate;
   }
   
-  public void setSuggestDate(String suggestDate)
+  public void setSuggestDate(Date suggestDate)
   {
     this.suggestDate = suggestDate;
   }
