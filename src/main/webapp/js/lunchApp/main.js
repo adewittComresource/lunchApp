@@ -27,9 +27,9 @@ define([
     "./restaurantGrid",
     "./restaurantProfileGrid",
     "./addRestaurantProfileContent",
-    'dojo/domReady!'
-    
-], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent) {
+    "dijit/form/Button",
+    'dojo/domReady!'    
+], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,Button) {
     var lunchApp = {};
     
     // Main Container
@@ -42,8 +42,43 @@ define([
         tabPosition:"top",
         useMenu: false, 
         useSlider: false
-    });
-    
+    });       
+         //logout button
+         var logoutpane = new ContentPane({
+
+             title:"LogoutButton",
+             id : "logoutButtonId",  
+         });
+
+
+         var btnLogout = Button({
+                     id: "LunchAppLogout1",
+                     name: "LunchAppLogout1",
+                     label: "Logout"
+                 }).placeAt(logoutpane.domNode);
+                 
+        //Attach a click event to the button
+         on(btnLogout, "click", function (){            
+             //Post to create the restaurant
+             var xhrArgs = {
+               url: "/lunchApp/services/logoutuser",                
+               handleAs: "json",
+               headers: {
+                   "Content-Type": "application/json"
+               },
+               load: function (data) {
+                   //DO Stuff after the POST is finished
+                    location.reload();
+               },
+               error: function (error) {
+                   //POST ERROR
+               }
+           };            // Call the asynchronous xhrPost
+           var deferred = dojo.xhrPost(xhrArgs);
+        });
+        
+        mainContainer.addChild(logoutpane);
+        
     //Lunch Suggestions
     var suggestionPane = new ContentPane({
         title: "Suggestions",
@@ -94,6 +129,7 @@ define([
     // It is important to remember to always call startup on widgets
     // It will not hurt if you do it twice, but things will often not work right if you forget to do it
     addLunchLocationDialog.startup();
+    logoutpane.startup();
     
     //Lunch Restaurant Profile Content
     var restaurantProfileWidget = addRestaurantProfileContent({ parent: this });
