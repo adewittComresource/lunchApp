@@ -129,11 +129,19 @@ define([
             var costFactor = this.lunchCostFactorSlider.get('value');
             var deliciousnessFactor = this.lunchDeliciousnessFactorSlider.get('value');
             var discomfortFactor = this.lunchDiscomfortFactorSlider.get('value');
+            var lunchFullnessFactor = this.lunchFullnessFactorSlider.get('value');
+            var optIn = this.optInCheckBoxWidget.get('value');
             //Post to create the restaurant
             var xhrArgs = {
                 url: "/lunchApp/services/insertRestaurantProfiles/",
                 postData: dojo.toJson({
                     restaurantId: restaurantId,
+                    timeFactor:timeFactor,
+                    costFactor:costFactor,
+                    postLunchFullnessFactor:lunchFullnessFactor,
+                    deliciousnessFactor:deliciousnessFactor,
+                    postLunchDiscomfortFactor:discomfortFactor,
+                    optIn:optIn
                 }),
                 handleAs: "json",
                 headers: {
@@ -141,7 +149,7 @@ define([
                 },
                 load: function (data) {
                     //DO Stuff after the POST is finished
-                    lunchAppGlobal.main.addLunchProfileDialog.hide();
+                    lunchAppGlobal.addLunchProfileDialog.hide();
                 },
                 error: function (error) {
                     //POST ERROR
