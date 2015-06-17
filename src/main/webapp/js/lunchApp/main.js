@@ -45,7 +45,7 @@ var lunchApp = {};
         
          //logout button
          var logoutpane = new ContentPane({
-
+             content: "Welcome, ", 
              title:"LogoutButton",
              id : "logoutButtonId",  
          });

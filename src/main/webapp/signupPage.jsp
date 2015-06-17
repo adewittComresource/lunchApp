@@ -21,13 +21,13 @@
 
     String loginHeader = "";
     if (title == null) {
-        title = "Please log in";
+        title = "Please Sign up";
     }
 %>
 
 <html>
     <head>
-        <title>Login</title>
+        <title>Sign Up</title>
         <link rel="stylesheet" href="js/dijit/themes/claro/claro.css" />
         <link rel="stylesheet" href="css/style.css" />
         <link rel="shortcut icon" type="image/ico" href="media/favicon.ico" />
@@ -75,16 +75,16 @@
                 margin: 0px !important;
             }
 
-            #loginButtonContainer{
+            #signupButtonContainer{
                 display: table;
                 margin-left: auto;
                 margin-right: auto;
             }
-            #logButton{
+            #signupButton{
                 font-size:16px !important;
             }
 
-            .loginButtonWidth  span.dijitButtonNode {
+            .signupButtonWidth  span.dijitButtonNode {
                 width:100px;
                 margin:15px;
             }
@@ -106,7 +106,11 @@
                 padding: 5px;
                 margin-bottom: 10px;
                 margin-top: 10px;
-            }			
+            }	
+            
+            .errorStyle{
+                color: #952B33;
+            }
 
             .dijitButton .dijitButtonNode, .dijitDropDownButton .dijitButtonNode, .dijitComboButton .dijitButtonNode, .dijitToggleButton .dijitButtonNode {
                 border: 2px solid gray;
@@ -129,20 +133,24 @@
 
         <div class="mainWrapper" >
             <div class='enviromentHeader'>
-                Lunch App <%= loginHeader%>
+                User Sign Up <%= loginHeader%>
             </div>
 
-            <form id='userLogin' method="post" target="_blank">
+            <form id='userSignup' method="post" target="_blank">
 
-                <div id='userNameLogin'></div>
-                <div id='passwordLogin'></div>
+                <div id='userNameSignup'></div>
+                <div class="errorStyle" id="signupNameError"></div>
+                <div id='passwordSignup'></div>
 
-                <input name="action" type="hidden" value="LoginUser">
+                <input name="action" type="hidden" value="SignupUser">
+                
+                
               
             </form> 
+            
+                <div class="errorStyle" id="signupError"></div>
 
-
-            <div id='loginButtonContainer' class="loginButtonWidth"></div>
+            <div id='signupButtonContainer' class="signupButtonWidth"></div>
         </div>
 
         <script type="text/javascript">
@@ -174,9 +182,9 @@
 
                         //Variables
                         //var submitButton = dom.byId('loginSubmit');
-                        var submitButton = dom.byId('loginButtonContainer');
-                        var usernameTextbox = dom.byId('userNameLogin');
-                        var passwordTextbox = dom.byId('passwordLogin');
+                        var submitButton = dom.byId('signupButtonContainer');
+                        var usernameTextbox = dom.byId('userNameSignup');
+                        var passwordTextbox = dom.byId('passwordSignup');
 
                         //UserName Textbox
                         this.userNameTextbox = new ValidationTextBox({
@@ -196,40 +204,79 @@
                         }, "password").placeAt(passwordTextbox);
 
                         //Save-Create Button for Entity
-                        this.loginButtonBase = Button({
-                            id: "logButton",
-                            name: "loginUser",
-                            label: "Login"
-                        }).placeAt(submitButton);
-                        //Save Click Event 
-                        on(this.loginButtonBase, "click", function () {
-                            self.loginUser();
-                        });
-                        
-                         this.SignupButtonBase = Button({
+                        this.SignupButtonBase = Button({
                             id: "signupButton",
                             name: "SignupUser",
                             label: "Signup"
                         }).placeAt(submitButton);
                         //Save Click Event 
                         on(this.SignupButtonBase, "click", function () {
-                             window.location.replace("signupPage.jsp");
+                            self.SignupUser();
                         });
-                        
-                      
-                        
 
                         query("input[type='password']").on("keydown", function (event) {
                             //query returns a nodelist, which has an on() function available that will listen
                             //to all keydown events for each node in the list
                             switch (event.keyCode) {
                                 case keys.ENTER:
-                                    self.loginUser();
+                                    self.SignupUser();
                                     break;
                             }
                         });
 
-                        this.loginUser = function () {
+                        this.SignupUser = function () {
+                            //Get Input Values
+                            var username = self.userNameTextbox.get('value');
+                            var password = self.passwordTextbox.get('value');
+
+                            if (username !== '' && password !== '') {
+                                var xhrArgs = {
+                                    url: "/lunchApp/services/insertuser",
+                                    postData: dojo.toJson({userName: username, password: password}),
+                                    handleAs: "text",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    load: function (data) {
+                                        //Revert border styling
+                                        var passwordNode = dom.byId("passwordSignup");
+                                        passwordNode.lastElementChild.style.borderColor = 'black';
+                                        passwordNode.lastElementChild.style.borderWidth = '1px';
+                                        loginUser();
+                                        
+//
+//                                        var jsonCookie = JSON.parse(data);
+//                                        var sessionID = jsonCookie.JSESSIONID;
+//                                        var readOnly = jsonCookie.readOnly;
+
+                                        if (data === 'failed') {
+//									var loginForm = dom.byId("autoLogin");
+//									loginForm.submit();                                                                
+                                            setInterval(function () {
+                                                window.location.href = "/lunchApp/signupPage.jsp";
+                                            }, 500);
+                                        } else {
+                                            window.location.href = "/lunchApp";
+                                        }
+                                    },
+                                    error: function (error) {
+                                        // We'll 404 in the demo, but that's okay.  We don't have a 'postIt' service on the
+                                        // docs server.
+                                        
+                                         var errorNode = dom.byId("signupNameError");
+                                         errorNode.innerHTML="Try with a Different NAME...:)";
+                                       
+                                     var errorNode = dom.byId("signupError");
+                                     errorNode.innerHTML="Error Creating User.!!!.User may Already Exist!!!";
+                                      
+                                    }
+                                };
+                                // Call the asynchronous xhrPost
+                                var deferred = dojo.xhrPost(xhrArgs);
+                            }
+                        };
+                        
+                         var loginUser = function () {
                             //Get Input Values
                             var username = self.userNameTextbox.get('value');
                             var password = self.passwordTextbox.get('value');
@@ -248,7 +295,7 @@
                                         passwordNode.lastElementChild.style.borderColor = 'black';
                                         passwordNode.lastElementChild.style.borderWidth = '1px';
                                         
-                                       
+                                       lunchAppGlobal.currentUser = username;
 //
 //                                        var jsonCookie = JSON.parse(data);
 //                                        var sessionID = jsonCookie.JSESSIONID;
@@ -266,50 +313,7 @@
                                     },
                                     error: function (error) {
                                         // We'll 404 in the demo, but that's okay.  We don't have a 'postIt' service on the
-                                        // docs server.
-                                        var passwordNode = dom.byId("passwordLogin");
-                                    
-                                        var shakeEffectLeft = baseFx.animateProperty({
-                                            node: passwordNode,
-                                            properties: {
-                                                marginLeft: {
-                                                    start: 20,
-                                                    end: 0,
-                                                    unit: "px"
-                                                },
-                                                marginRight: {
-                                                  start: 20,
-                                                  end: 0,
-                                                  unit: "px"
-                                                }
-                                            },
-                                            easing: easing.elasticInOut,
-                                            duration: 100
-                                        });
-
-                                        var shakeEffectRight = baseFx.animateProperty({
-                                            node: passwordNode,
-                                            onEnd: function(){
-                                                shakeEffectLeft.play();
-                                            },
-                                            properties: {
-                                                marginLeft: {
-                                                    start: 0,
-                                                    end: 20,
-                                                    unit: "px"
-                                                },
-                                                marginRight: {
-                                                  start: 0,
-                                                  end: 20,
-                                                  unit: "px"
-                                                }
-                                            },
-                                            easing: easing.elasticInOut,
-                                            duration: 100
-                                        });
-                                        passwordNode.lastElementChild.style.borderColor = 'red';
-                                        passwordNode.lastElementChild.style.borderWidth = '4px';
-                                        shakeEffectRight.play();
+                                      
                                     }
                                 };
                                 // Call the asynchronous xhrPost
