@@ -17,118 +17,134 @@
  * More information about everything described about the loader throughout this file can be found at
  * <http://dojotoolkit.org/reference-guide/loader/amd.html>.
  */
-define([
-        "dijit/Dialog",
-        "dijit/layout/TabContainer",
-        "dijit/layout/BorderContainer",
-        "dijit/layout/ContentPane",
-        "dojo/on",
-        "./suggestRestaurantContainer",
-        "./addLunchLocationContent",
-        "./restaurantGrid",
-        "./restaurantProfileGrid",
-        "dijit/form/Button",
-        'dojo/domReady!'
-], function (Dialog, TabContainer, BorderContainer, ContentPane, on, suggestRestaurantContainer, addLunchLocationContent, restaurantGrid, restaurantProfileGrid, Button) {
-var lunchApp = {};
-        // Main Container
-        var mainContainer = BorderContainer({
+define([ 
+    "dijit/Dialog",
+    "dijit/layout/TabContainer",
+    "dijit/layout/BorderContainer",
+    "dijit/layout/ContentPane",
+    "dojo/on",
+    "./addLunchLocationContent",
+    "./restaurantGrid",
+    "./restaurantProfileGrid",
+    "./addRestaurantProfileContent",
+    'dojo/domReady!'
+    
+], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent) {
+    var lunchApp = {};
+    
+    // Main Container
+    var mainContainer = BorderContainer({
         "design": "headline"
-        }, "mainContainer");
-        var mainTabContainer = new TabContainer({
+    }, "mainContainer");
+    
+    var mainTabContainer = new TabContainer({
         style: "height: 100%; width: 100%;",
-                tabPosition:"top",
-                useMenu: false,
-                useSlider: false
-        });
-        
-        
-         //logout button
-         var logoutpane = new ContentPane({
-
-             title:"LogoutButton",
-             id : "logoutButtonId",  
-         });
-
-
-         var btnLogout = Button({
-                     id: "LunchAppLogout1",
-                     name: "LunchAppLogout1",
-                     label: "Logout"
-                 }).placeAt(logoutpane.domNode);
-                 
-        //Attach a click event to the button
-         on(btnLogout, "click", function (){            
-             //Post to create the restaurant
-             var xhrArgs = {
-               url: "/lunchApp/services/logoutuser",                
-               handleAs: "json",
-               headers: {
-                   "Content-Type": "application/json"
-               },
-               load: function (data) {
-                   //DO Stuff after the POST is finished
-                    location.reload();
-               },
-               error: function (error) {
-                   //POST ERROR
-               }
-           };            // Call the asynchronous xhrPost
-           var deferred = dojo.xhrPost(xhrArgs);
-        });
-        
-        mainContainer.addChild(logoutpane);
-        
-        //Lunch Suggestions
-        var restaurantSuggestionWidget = suggestRestaurantContainer({parent: this})
-        var suggestionPane = new ContentPane({
+        tabPosition:"top",
+        useMenu: false, 
+        useSlider: false
+    });
+    
+    //Lunch Suggestions
+    var suggestionPane = new ContentPane({
         title: "Suggestions",
-                content: restaurantSuggestionWidget
-        });
-        mainTabContainer.addChild(suggestionPane);
-        var restaurantContentWidget = restaurantGrid({ parent: this });
-        //Restaurants
-        var restaurantListPane = new ContentPane({
-        title: "Restaurants",
-                content: restaurantContentWidget
-        });
-        mainTabContainer.addChild(restaurantListPane);
-        on(restaurantListPane, "show", function(){
-        restaurantContentWidget.grid.resize();
-        });
-        var restaurantProfileContentWidget = restaurantProfileGrid({ parent: this });
-        //Restaurant Profiles
-        var restaurantProfilePane = new ContentPane({
-        title: "Restaurant Profiles",
-                content: restaurantProfileContentWidget
-        });
-        mainTabContainer.addChild(restaurantProfilePane);
-       
-        on(restaurantProfilePane, "show", function(){
-        restaurantProfileContentWidget.grid.resize();
-        });
-        //Call this to create the widget in the DOM
-        mainContainer.addChild(mainTabContainer);
-        mainTabContainer.startup();
-        logoutpane.startup();
-//    mainTabContainer.selectTab(suggestionPane);
+        content: "Put Lunch Suggestions Here"
+    });
+    mainTabContainer.addChild(suggestionPane);
 
-        //Lunch Location Content
-        var lunchLocationWidget = addLunchLocationContent({ parent: this });
-        //Add Dialog for Creating New Lunch Location
-        var addLunchLocationDialog = new Dialog({
+    var restaurantContentWidget = restaurantGrid({ parent: this });
+    //Restaurants
+    var restaurantListPane = new ContentPane({
+        title: "Restaurants",
+        content: restaurantContentWidget
+    });
+    mainTabContainer.addChild(restaurantListPane);
+    
+    on(restaurantListPane, "show", function(){
+        restaurantContentWidget.grid.resize();
+    });
+    
+    var restaurantProfileContentWidget = restaurantProfileGrid({ parent: this });
+    //Restaurant Profiles
+    var restaurantProfilePane = new ContentPane({
+        title: "Restaurant Profiles",
+        content: restaurantProfileContentWidget
+    });
+    mainTabContainer.addChild(restaurantProfilePane);
+    
+    on(restaurantProfilePane, "show", function(){
+    restaurantProfileContentWidget.grid.resize();
+    });
+    
+    //Call this to create the widget in the DOM
+    mainContainer.addChild(mainTabContainer);
+    
+    mainTabContainer.startup();
+//    mainTabContainer.selectTab(suggestionPane);
+    //Lunch Location Content
+    var lunchLocationWidget = addLunchLocationContent({ parent: this });
+    //Add Dialog for Creating New Lunch Location
+    var addLunchLocationDialog = new Dialog({
         id: "addLunchLocation",
-                title: "Add Restaurant",
-                content:lunchLocationWidget,
-                style: "width: 50%;font-size:18px;text-align:center;"
-        });
-        //This creates a global that can be referenced by other widgets or when you are debugging
-        lunchAppGlobal.addLunchRestaurantDialog = addLunchLocationDialog;
-        // It is important to remember to always call startup on widgets
-        // It will not hurt if you do it twice, but things will often not work right if you forget to do it
-        addLunchLocationDialog.startup();
-        // Returning a value from an AMD module means that it becomes the value of the module. In this case, we return
-        // the app object, which means that other parts of the application that require app/main could get a reference
-        // to the dialog
-        return lunchApp;
+        title: "Add Restaurant",
+        content:lunchLocationWidget,
+        style: "width: 50%;font-size:18px;text-align:center;"
+    });
+     //This creates a global that can be referenced by other widgets or when you are debugging
+    lunchAppGlobal.addLunchRestaurantDialog = addLunchLocationDialog;
+    // It is important to remember to always call startup on widgets
+    // It will not hurt if you do it twice, but things will often not work right if you forget to do it
+    addLunchLocationDialog.startup();
+    
+    //Lunch Restaurant Profile Content
+    var restaurantProfileWidget = addRestaurantProfileContent({ parent: this });
+    //Add Dialog for creating new restaurant profile
+    var addLunchProfileDialog = new Dialog({
+        id: "addRestaurantProfile",
+        title: "Add Restaurant Profile",
+        content:restaurantProfileWidget,
+        style: "width: 50%;font-size:18px;text-align:center;"
+    });
+    lunchAppGlobal.addLunchRestaurantProfileDialog = addLunchProfileDialog;
+    addLunchProfileDialog.startup();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Returning a value from an AMD module means that it becomes the value of the module. In this case, we return
+    // the app object, which means that other parts of the application that require app/main could get a reference
+    // to the dialog
+    return lunchApp;
 });
