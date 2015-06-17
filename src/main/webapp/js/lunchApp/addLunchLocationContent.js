@@ -239,7 +239,7 @@ define([
             }
         },
         
-        insertRestaurant: function () {
+            insertRestaurant: function () {
             var self = this;
 
             //Get the input values into variables
