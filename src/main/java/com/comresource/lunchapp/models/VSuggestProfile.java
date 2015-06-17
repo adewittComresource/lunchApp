@@ -41,27 +41,27 @@ public class VSuggestProfile
   @Column(name="USER_NAME")
   private String userName;
   @Column(name="TIME_FACTOR")
-  private float timeFactor;
+  private Float timeFactor;
   @Column(name="COST_FACTOR")
-  private float costFactor;
+  private Float costFactor;
   @Column(name="POST_LUNCH_FULLNESS_FACTOR")
-  private float postLunchFullnessFactor;
+  private Float postLunchFullnessFactor;
   @Column(name="DELICIOUSNESS_FACTOR")
-  private float deliciousnessFactor;
+  private Float deliciousnessFactor;
   @Column(name="POST_LUNCH_DISCOMFORT_FACTOR")
-  private float postLunchDiscomfortFactor;
+  private Float postLunchDiscomfortFactor;
   @Column(name="OPT_IN")
   private Integer optIn;
   @Column(name="AVG_TIME_FACTOR")
-  private float avgTimeFactor;
+  private Float avgTimeFactor;
   @Column(name="AVG_COST_FACTOR")
-  private float avgCostFactor;
+  private Float avgCostFactor;
   @Column(name="AVG_POST_LUNCH_FULLNESS_FACTOR")
-  private float avgPostLunchFullnessFactor;
+  private Float avgPostLunchFullnessFactor;
   @Column(name="AVG_DELICIOUSNESS_FACTOR")
-  private float avgDeliciousnessFactor;
+  private Float avgDeliciousnessFactor;
   @Column(name="AVG_POST_LUNCH_DISCOMFORT_FACTOR")
-  private float avgPostLunchDiscomfortFactor;
+  private Float avgPostLunchDiscomfortFactor;
   
   public String getId()
   {
@@ -173,52 +173,52 @@ public class VSuggestProfile
     this.userId = userId;
   }
   
-  public float getTimeFactor()
+  public Float getTimeFactor()
   {
     return this.timeFactor;
   }
   
-  public void setTimeFactor(float timeFactor)
+  public void setTimeFactor(Float timeFactor)
   {
     this.timeFactor = timeFactor;
   }
   
-  public float getCostFactor()
+  public Float getCostFactor()
   {
     return this.costFactor;
   }
   
-  public void setCostFactor(float costFactor)
+  public void setCostFactor(Float costFactor)
   {
     this.costFactor = costFactor;
   }
   
-  public float getPostLunchFullnessFactor()
+  public Float getPostLunchFullnessFactor()
   {
     return this.postLunchFullnessFactor;
   }
   
-  public void setPostLunchFullnessFactor(float postLunchFullnessFactor)
+  public void setPostLunchFullnessFactor(Float postLunchFullnessFactor)
   {
     this.postLunchFullnessFactor = postLunchFullnessFactor;
   }
   
-  public float getDeliciousnessFactor()
+  public Float getDeliciousnessFactor()
   {
     return this.deliciousnessFactor;
   }
   
-  public void setDeliciousnessFactor(float deliciousnessFactor)
+  public void setDeliciousnessFactor(Float deliciousnessFactor)
   {
     this.deliciousnessFactor = deliciousnessFactor;
   }
   
-  public float getPostLunchDiscomfortFactor()
+  public Float getPostLunchDiscomfortFactor()
   {
     return this.postLunchDiscomfortFactor;
   }
   
-  public void setPostLunchDiscomfortFactor(float postLunchDiscomfortFactor)
+  public void setPostLunchDiscomfortFactor(Float postLunchDiscomfortFactor)
   {
     this.postLunchDiscomfortFactor = postLunchDiscomfortFactor;
   }
@@ -233,52 +233,52 @@ public class VSuggestProfile
     this.optIn = optIn;
   }
   
-  public float getAvgTimeFactor()
+  public Float getAvgTimeFactor()
   {
     return this.avgTimeFactor;
   }
   
-  public void setAvgTimeFactor(float avgTimeFactor)
+  public void setAvgTimeFactor(Float avgTimeFactor)
   {
     this.avgTimeFactor = avgTimeFactor;
   }
   
-  public float getAvgCostFactor()
+  public Float getAvgCostFactor()
   {
     return this.avgCostFactor;
   }
   
-  public void setAvgCostFactor(float avgCostFactor)
+  public void setAvgCostFactor(Float avgCostFactor)
   {
     this.avgCostFactor = avgCostFactor;
   }
   
-  public float getAvgPostLunchFullnessFactor()
+  public Float getAvgPostLunchFullnessFactor()
   {
     return this.avgPostLunchFullnessFactor;
   }
   
-  public void setAvgPostLunchFullnessFactor(float avgPostLunchFullnessFactor)
+  public void setAvgPostLunchFullnessFactor(Float avgPostLunchFullnessFactor)
   {
     this.avgPostLunchFullnessFactor = avgPostLunchFullnessFactor;
   }
   
-  public float getAvgDeliciousnessFactor()
+  public Float getAvgDeliciousnessFactor()
   {
     return this.avgDeliciousnessFactor;
   }
   
-  public void setAvgDeliciousnessFactor(float avgDeliciousnessFactor)
+  public void setAvgDeliciousnessFactor(Float avgDeliciousnessFactor)
   {
     this.avgDeliciousnessFactor = this.deliciousnessFactor;
   }
   
-  public float getAvgPostLunchDiscomfortFactor()
+  public Float getAvgPostLunchDiscomfortFactor()
   {
     return this.avgPostLunchDiscomfortFactor;
   }
   
-  public void setAvgPostLunchDiscomfortFactor(float avgPostLunchDiscomfortFactor)
+  public void setAvgPostLunchDiscomfortFactor(Float avgPostLunchDiscomfortFactor)
   {
     this.avgPostLunchDiscomfortFactor = avgPostLunchDiscomfortFactor;
   }

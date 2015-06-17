@@ -19,6 +19,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 @Path("/restaurantgraphinfo")
@@ -35,9 +36,18 @@ public class RestaurantGraphInfo {
         //DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String testingUserName = (String)session.getAttribute("userName");
-        Criteria crit = sess.createCriteria(VSuggestProfile.class).add(Restrictions.conjunction()
-                .add(Restrictions.eq("userName", testingUserName))
-                .add(Restrictions.eq("suggestDate", date)));
+        Criteria crit;
+        crit = sess.createCriteria(VSuggestProfile.class).add(Restrictions.conjunction()
+                .add(
+                    Restrictions.disjunction()
+                        .add(Restrictions.eq("userName", testingUserName))
+                        .add(Restrictions.isNull("userName"))
+                )
+                .add(Restrictions.eq("suggestDate", date))).addOrder(Order.desc("userName"));
+        
+        //Only get the first 3 rows
+//        crit.setFirstResult(0).setMaxResults(3);
+        
         Collection<?> results = crit.list();
         if (results != null) {
             entityManager.detach(results);
