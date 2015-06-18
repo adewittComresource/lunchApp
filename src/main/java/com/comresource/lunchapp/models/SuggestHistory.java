@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "RESTAURANTS")
+@Table(name = "SUGGEST_HISTORY")
 public class SuggestHistory implements Serializable {
 
     private static final long serialVersionUID = 1L;
