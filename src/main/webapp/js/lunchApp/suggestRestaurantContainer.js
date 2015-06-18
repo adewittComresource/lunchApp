@@ -50,6 +50,7 @@ define([
                         //Place your new widget in the container
                         profileWidget.placeAt(self.restaurantSuggestionContainer);
                     }
+                    lunchAppGlobal.mainTabContainer.resize();
                 },
                 error: function (error) {
                 }

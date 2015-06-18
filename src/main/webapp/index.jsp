@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page import="javax.servlet.http.HttpSession"%>
-<% 
+<%
     HttpSession currentSession = request.getSession();
     String authenticated = (String) currentSession.getAttribute("authenticated");
     if (authenticated == null) {
@@ -29,7 +29,10 @@
             Configuration options for the loader can be viewed at http://dojotoolkit.org/reference-guide/loader/amd.html
             along with a bunch of additional information about its features.
         -->
+
         <script>
+
+
             var dojoConfig = {
                 // Enable the AMD loader
                 async: true,
@@ -53,7 +56,20 @@
                 // instead of the legacy Dojo resolution method (relative to the parent directory of baseUrl)
                 tlmSiblingOfDojo: false
             };
-            
+
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
+        <script>
+                function initialize() {
+                    var mapCanvas = document.getElementById('map-canvas');
+                    var mapOptions = {
+                        center: new google.maps.LatLng(39.973816, -83.049663),
+                        zoom: 10,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    }
+                    var map = new google.maps.Map(mapCanvas, mapOptions)
+                }
+                google.maps.event.addDomListener(window, 'load', initialize);
         </script>
         <script src="js/dojo/dojo.js"></script>
         <script>

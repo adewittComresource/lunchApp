@@ -29,8 +29,10 @@ define([
     "./addRestaurantProfileContent",
     "./suggestRestaurantContainer",
     "dijit/form/Button",
+    "dojo/dom-construct",
     'dojo/domReady!'    
-], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,suggestRestaurantContainer,Button) {
+], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,
+restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,suggestRestaurantContainer,Button,domConstruct) {
     var lunchApp = {};
     
     // Main Container
@@ -39,17 +41,58 @@ define([
     }, "mainContainer");
     
     var mainTabContainer = new TabContainer({
-        style: "height: 100%; width: 100%;",
+//        style: "height:500px; width: 100%;",
         tabPosition:"top",
         useMenu: false, 
-        useSlider: false
+        useSlider: false,
+        doLayout:false
     });       
+    
+    lunchAppGlobal.mainTabContainer = mainTabContainer;
          //logout button
          var logoutpane = new ContentPane({
-             content: "Welcome, ", 
+             content: "Welcome...!!!",
              title:"LogoutButton",
-             id : "logoutButtonId",  
+             id : "logoutPaneContainer",  
          });
+         
+         var getCurrentUser = function () {
+                            //Get Input Values
+                           
+
+                            
+                                var xhrArgs = {
+                                    url: "/lunchApp/services/properties",
+                                    
+                                    handleAs: "json",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    load: function (data) {
+                                        //Revert border styling                             
+                                       var userNameContainer = document.createElement('div');
+                                        
+                                       var gotUserName = data.userName;
+                                       userNameContainer.innerHTML = gotUserName;
+                                       
+                                       //logoutpane.set("content",gotUserName);
+                                       //
+                                     domConstruct.place(userNameContainer,"logoutPaneContainer");
+//                                       userNameContainer.placeAt(logoutpane.domNode);
+//
+//                                    
+
+                                        
+                                    }                                   
+                                };
+                                // Call the asynchronous xhrPost
+                                var deferred = dojo.xhrGet(xhrArgs);
+                            };
+                            
+                            getCurrentUser();
+                            
+                            
+        
 
 
          var btnLogout = Button({
@@ -84,7 +127,8 @@ define([
     //Lunch Suggestions
     var suggestionPane = new ContentPane({
         title: "Suggestions",
-        content: suggestionWidget
+        content: suggestionWidget,
+        selected: true
     });
     mainTabContainer.addChild(suggestionPane);
 
@@ -107,7 +151,7 @@ define([
         content: restaurantProfileContentWidget
     });
     mainTabContainer.addChild(restaurantProfilePane);
-    
+
     on(restaurantProfilePane, "show", function(){
     restaurantProfileContentWidget.grid.resize();
     });
@@ -116,6 +160,7 @@ define([
     mainContainer.addChild(mainTabContainer);
     
     mainTabContainer.startup();
+    
 //    mainTabContainer.selectTab(suggestionPane);
     //Lunch Location Content
     var lunchLocationWidget = addLunchLocationContent({ parent: this });
@@ -131,7 +176,10 @@ define([
     // It is important to remember to always call startup on widgets
     // It will not hurt if you do it twice, but things will often not work right if you forget to do it
     addLunchLocationDialog.startup();
-    logoutpane.startup();
+    logoutpane.startup(); 
+    
+  
+
     
     //Lunch Restaurant Profile Content
     var restaurantProfileWidget = addRestaurantProfileContent({ parent: this });
@@ -144,45 +192,10 @@ define([
     });
     lunchAppGlobal.addLunchRestaurantProfileDialog = addLunchProfileDialog;
     addLunchProfileDialog.startup();
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     // Returning a value from an AMD module means that it becomes the value of the module. In this case, we return
     // the app object, which means that other parts of the application that require app/main could get a reference
     // to the dialog
     return lunchApp;
 });
+

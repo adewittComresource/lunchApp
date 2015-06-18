@@ -38,7 +38,7 @@ define([
         buildRendering: function () {
             this.inherited(arguments);
             this.containerNode = this.domNode;
-            this.chart = new Chart(this.restaurantGraphContainer, {title: 'The Chart that broke a thousand Screens'});
+            this.chart = new Chart(this.restaurantGraphContainer, {title: 'Look a Chart'});
             this.chart.addPlot("default", {
                 type: "Spider",
                 labelOffset: -10,

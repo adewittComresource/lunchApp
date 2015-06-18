@@ -12,9 +12,9 @@ import org.hibernate.annotations.Type;
 @Entity
 @Table(name = "V_SUGGEST_PROFILE")
 @NamedNativeQuery(name = "suggestionForUser",
-        query = "SELECT S.*, P.COST_FACTOR, P.DELICIOUSNESS_FACTOR, P.POST_LUNCH_DISCOMFORT_FACTOR, P.POST_LUNCH_FULLNESS_FACTOR, P.TIME_FACTOR, P.OPT_IN, ? as USER_NAME, P.USER_ID "
-        + "FROM _top3 S "
-        + "LEFT JOIN RESTAURANT_PROFILE P ON S.RESTAURANT_ID = P.RESTAURANT_ID "
+        query = "SELECT S.*, P.COST_FACTOR, P.DELICIOUSNESS_FACTOR, P.POST_LUNCH_DISCOMFORT_FACTOR, "
+        + "P.POST_LUNCH_FULLNESS_FACTOR, P.TIME_FACTOR, P.OPT_IN, ? as USER_NAME, P.USER_ID "
+        + "FROM V_SUGGEST_PROFILE S LEFT JOIN RESTAURANT_PROFILE P ON S.RESTAURANT_ID = P.RESTAURANT_ID "
         + "AND P.USER_ID IN (SELECT USER_ID FROM USERS WHERE USER_NAME = ?)", resultClass = VSuggestProfile.class)
 //   Query query = session.getNamedQuery("SampleNameQuery");
 //   query.setParameter(0,"fsdfsdf");
