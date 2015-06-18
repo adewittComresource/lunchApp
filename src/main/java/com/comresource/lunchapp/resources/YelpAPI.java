@@ -69,6 +69,12 @@ public class YelpAPI {
     this.accessToken = new Token(token, tokenSecret);
   }
 
+  public YelpAPI(){
+      this.service = new ServiceBuilder().provider(TwoStepOAuth.class).apiKey(CONSUMER_KEY)
+              .apiSecret(CONSUMER_SECRET).build();
+      this.accessToken = new Token(TOKEN, TOKEN_SECRET);
+      
+  }
   /**
    * Creates and sends a request to the Search API by term and location.
    * <p>
