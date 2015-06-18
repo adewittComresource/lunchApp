@@ -100,9 +100,9 @@ define([
                 }
             }).placeAt(this.discomfortDropdownContainer);
             
-              this.optInCheckBoxWidget = new CheckBox({
+            this.optInCheckBox = new CheckBox({
                 id:"optInContainer",
-                name: "optInCheckbox",
+                name: "optInCheckboxName",
                 value: 1,
                 checked: false,
                 onChange: function(b){
@@ -111,7 +111,7 @@ define([
             }).placeAt(this.optInCheckbox);
             
             
-                this.btnCreateLocation = Button({
+            this.btnCreateLocation = Button({
                 id: "createProfileButton",
                 name: "createProfile",
                 label: "Create Restaurant Profile"
@@ -119,6 +119,15 @@ define([
             //Attach a click event to the button
             on(this.btnCreateLocation, "click", lang.hitch(this, this.insertProfile));
         },
+
+        settingCheckbox: function (widget, checkValue) {
+            if (checkValue == 1) {
+                widget.set('checked', true);
+            } else {
+                widget.set('checked', false);
+            }
+        },
+
 
             insertProfile: function () {
             var self = this;
@@ -130,7 +139,9 @@ define([
             var deliciousnessFactor = this.lunchDeliciousnessFactorSlider.get('value');
             var discomfortFactor = this.lunchDiscomfortFactorSlider.get('value');
             var lunchFullnessFactor = this.lunchFullnessFactorSlider.get('value');
-            var optIn = this.optInCheckBoxWidget.get('value');
+            
+            var optIn = this.getCheckboxValue(this.optInCheckBox);
+ 
             //Post to create the restaurant
             var xhrArgs = {
                 url: "/lunchApp/services/insertRestaurantProfiles/",
@@ -149,7 +160,8 @@ define([
                 },
                 load: function (data) {
                     //DO Stuff after the POST is finished
-                    lunchAppGlobal.addLunchProfileDialog.hide();
+                    lunchAppGlobal.addLunchRestaurantProfileDialog.hide();
+                   
                 },
                 error: function (error) {
                     //POST ERROR
@@ -159,13 +171,31 @@ define([
             var deferred = dojo.xhrPost(xhrArgs);
         },
         
-          populateDialog: function(data){
-            
-            this.restaurantDropdown.set('value',data.name);
-          
+//          populateDialog: function(data){
+//            
+//            this.restaurantDropdown.set('value',data.name);
+//          
+//        },
+//            
+            settingCheckbox: function(widget,checkValue){
+                if(checkValue == 1){
+                widget.set('checked',true);
+                }else{
+                widget.set('checked',false);
+              }
+            },
+        
+        
+        getCheckboxValue: function (checkboxId) {
+            var checkboxValue;
+            var isChecked = dijit.byId(checkboxId).checked;
+            if (isChecked) {
+                checkboxValue = 1;
+            } else {
+                checkboxValue = 0;
+            }
+            return checkboxValue;
         },
-            
-
       
         clearDialog: function () {
             //Clear Dialog back to Default 
