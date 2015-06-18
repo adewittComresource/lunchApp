@@ -129,6 +129,7 @@ define([
                     console.log('onChange called with parameter = ' + b + ', and widget value = ' + this.get('value') ); 
                 }
             }).placeAt(this.saturdayCheckbox);
+            
             this.sundayCheckBox = new CheckBox({
                 id:"sundayCheckboxContainer",
                 name: "dayOfWeekCheckbox",
@@ -208,9 +209,7 @@ define([
                     friday : friday,
                     saturday : saturday,
                     sunday : sunday
-                    
-                    
-                    
+
                     
                 }),
                 handleAs: "json",
@@ -239,7 +238,7 @@ define([
             }
         },
         
-        insertRestaurant: function () {
+            insertRestaurant: function () {
             var self = this;
 
             //Get the input values into variables
@@ -283,7 +282,7 @@ define([
                 },
                 load: function (data) {
                     //DO Stuff after the POST is finished
-                    lunchAppGlobal.main.addLunchLocationDialog.hide();
+                    lunchAppGlobal.addLunchLocationDialog.hide();
                 },
                 error: function (error) {
                     //POST ERROR

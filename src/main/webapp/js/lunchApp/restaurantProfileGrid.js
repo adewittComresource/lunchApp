@@ -69,6 +69,9 @@ ObjectStore,_WidgetBase,Button,on,lang,DijitRegistry,OnDemandGrid,Pagination,Sel
                     },
                     postLunchDiscomfortFactor: {
                         label: 'Post Lunch Discomfort Factor'
+                    },
+                    optIn: {
+                        label:'Opt In?'
                     }
                 }
             },this.restaurantProfileGridContainer);

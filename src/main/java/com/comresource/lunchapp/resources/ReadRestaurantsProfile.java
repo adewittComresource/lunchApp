@@ -7,16 +7,20 @@ package com.comresource.lunchapp.resources;
 
 import com.comresource.lunchapp.PersistenceManager;
 import com.comresource.lunchapp.models.RestaurantProfile;
+import com.comresource.lunchapp.models.Restaurants;
+import com.comresource.lunchapp.models.Users;
 import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,11 +42,12 @@ public class ReadRestaurantsProfile {
     //https://jersey.java.net/documentation/latest/jaxrs-resources.html
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll() throws Exception {
+    public Response getAll(String userId) throws Exception {
         EntityManager entityManager = PersistenceManager.getEntityManager();
         Response.ResponseBuilder builder;
         //Get Session to act as a factory for the Criteria Instance
         Session sess = entityManager.unwrap(Session.class);
+      
         //Hibernate Criteria Docs
         //https://docs.jboss.org/hibernate/orm/3.3/reference/en-US/html/querycriteria.html
         //Specify the Model Class to be used in the query

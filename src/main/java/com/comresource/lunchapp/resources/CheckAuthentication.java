@@ -1,6 +1,5 @@
 package com.comresource.lunchapp.resources;
 
-
 import com.comresource.lunchapp.PersistenceManager;
 import com.comresource.lunchapp.models.Users;
 import java.io.IOException;
@@ -70,6 +69,9 @@ public class CheckAuthentication {
         Criteria crit = sess.createCriteria(Users.class).add(Restrictions.eq("userName", loginUserName));
         //Query for Results
         List results = crit.list();
+        Users currentUser = (Users) results.get(0);
+        
+        String currentUserId = currentUser.getUserID();
 
         if (results != null && !results.isEmpty()) {
             // disconnect the entity manager
@@ -83,6 +85,7 @@ public class CheckAuthentication {
             if (checkHashResult) {
                 session.setAttribute("authenticated", "true");
                 session.setAttribute("userName", loginUserName);
+                session.setAttribute("userID", currentUserId);
                 return "passed";
                 
             }

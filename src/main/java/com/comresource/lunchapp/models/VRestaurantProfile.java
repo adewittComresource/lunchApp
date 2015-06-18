@@ -18,7 +18,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "V_RESTAURANT_PROFILE")
 public class VRestaurantProfile implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    /**
+     * @param aSerialVersionUID the serialVersionUID to set
+     */
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
+    }
 
     @Id
     @Column(name = "RESTAURANT_PROFILE_ID")
@@ -197,5 +211,10 @@ public class VRestaurantProfile implements Serializable {
     public void setOptIn(Integer optIn) {
         this.optIn = optIn;
     }
+
+   
+ 
+
+
 
 }
