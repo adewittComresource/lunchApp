@@ -32,15 +32,15 @@ public class VRestaurantProfile implements Serializable {
     @Column(name = "USER_NAME")
     private String userName;
     @Column(name = "TIME_FACTOR")
-    private float timeFactor;
+    private Float timeFactor;
     @Column(name = "COST_FACTOR")
-    private float costFactor;
+    private Float costFactor;
     @Column(name = "POST_LUNCH_FULLNESS_FACTOR")
-    private float postLunchFullnessFactor;
+    private Float postLunchFullnessFactor;
     @Column(name = "DELICIOUSNESS_FACTOR")
-    private float deliciousnessFactor;
+    private Float deliciousnessFactor;
     @Column(name = "POST_LUNCH_DISCOMFORT_FACTOR")
-    private float postLunchDiscomfortFactor;
+    private Float postLunchDiscomfortFactor;
     @Column(name = "OPT_IN")
     private Integer optIn;
 
@@ -117,70 +117,70 @@ public class VRestaurantProfile implements Serializable {
     /**
      * @return the timeFactor
      */
-    public float getTimeFactor() {
+    public Float getTimeFactor() {
         return timeFactor;
     }
 
     /**
      * @param timeFactor the timeFactor to set
      */
-    public void setTimeFactor(float timeFactor) {
+    public void setTimeFactor(Float timeFactor) {
         this.timeFactor = timeFactor;
     }
 
     /**
      * @return the costFactor
      */
-    public float getCostFactor() {
+    public Float getCostFactor() {
         return costFactor;
     }
 
     /**
      * @param costFactor the costFactor to set
      */
-    public void setCostFactor(float costFactor) {
+    public void setCostFactor(Float costFactor) {
         this.costFactor = costFactor;
     }
 
     /**
      * @return the postLunchFullnessFactor
      */
-    public float getPostLunchFullnessFactor() {
+    public Float getPostLunchFullnessFactor() {
         return postLunchFullnessFactor;
     }
 
     /**
      * @param postLunchFullnessFactor the postLunchFullnessFactor to set
      */
-    public void setPostLunchFullnessFactor(float postLunchFullnessFactor) {
+    public void setPostLunchFullnessFactor(Float postLunchFullnessFactor) {
         this.postLunchFullnessFactor = postLunchFullnessFactor;
     }
 
     /**
      * @return the deliciousnessFactor
      */
-    public float getDeliciousnessFactor() {
+    public Float getDeliciousnessFactor() {
         return deliciousnessFactor;
     }
 
     /**
      * @param deliciousnessFactor the deliciousnessFactor to set
      */
-    public void setDeliciousnessFactor(float deliciousnessFactor) {
+    public void setDeliciousnessFactor(Float deliciousnessFactor) {
         this.deliciousnessFactor = deliciousnessFactor;
     }
 
     /**
      * @return the postLunchDiscomfortFactor
      */
-    public float getPostLunchDiscomfortFactor() {
+    public Float getPostLunchDiscomfortFactor() {
         return postLunchDiscomfortFactor;
     }
 
     /**
      * @param postLunchDiscomfortFactor the postLunchDiscomfortFactor to set
      */
-    public void setPostLunchDiscomfortFactor(float postLunchDiscomfortFactor) {
+    public void setPostLunchDiscomfortFactor(Float postLunchDiscomfortFactor) {
         this.postLunchDiscomfortFactor = postLunchDiscomfortFactor;
     }
 
