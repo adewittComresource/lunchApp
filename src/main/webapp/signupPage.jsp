@@ -295,7 +295,7 @@
                                         passwordNode.lastElementChild.style.borderColor = 'black';
                                         passwordNode.lastElementChild.style.borderWidth = '1px';
                                         
-                                       lunchAppGlobal.currentUser = username;
+                                       
 //
 //                                        var jsonCookie = JSON.parse(data);
 //                                        var sessionID = jsonCookie.JSESSIONID;

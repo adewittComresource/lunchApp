@@ -29,8 +29,10 @@ define([
     "./addRestaurantProfileContent",
     "./suggestRestaurantContainer",
     "dijit/form/Button",
+    "dojo/dom-construct",
     'dojo/domReady!'    
-], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,suggestRestaurantContainer,Button) {
+], function (Dialog,TabContainer,BorderContainer,ContentPane,on,addLunchLocationContent,
+restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,suggestRestaurantContainer,Button,domConstruct) {
     var lunchApp = {};
     
     // Main Container
@@ -46,10 +48,48 @@ define([
     });       
          //logout button
          var logoutpane = new ContentPane({
-             content: "Welcome, ", 
+             content: "Welcome...!!!",
              title:"LogoutButton",
-             id : "logoutButtonId",  
+             id : "logoutPaneContainer",  
          });
+         
+         var getCurrentUser = function () {
+                            //Get Input Values
+                           
+
+                            
+                                var xhrArgs = {
+                                    url: "/lunchApp/services/properties",
+                                    
+                                    handleAs: "json",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    load: function (data) {
+                                        //Revert border styling                             
+                                       var userNameContainer = document.createElement('div');
+                                        
+                                       var gotUserName = data.userName;
+                                       userNameContainer.innerHTML = gotUserName;
+                                       
+                                       //logoutpane.set("content",gotUserName);
+                                       //
+                                     domConstruct.place(userNameContainer,"logoutPaneContainer");
+//                                       userNameContainer.placeAt(logoutpane.domNode);
+//
+//                                    
+
+                                        
+                                    }                                   
+                                };
+                                // Call the asynchronous xhrPost
+                                var deferred = dojo.xhrGet(xhrArgs);
+                            };
+                            
+                            getCurrentUser();
+                            
+                            
+        
 
 
          var btnLogout = Button({
@@ -131,7 +171,10 @@ define([
     // It is important to remember to always call startup on widgets
     // It will not hurt if you do it twice, but things will often not work right if you forget to do it
     addLunchLocationDialog.startup();
-    logoutpane.startup();
+    logoutpane.startup(); 
+    
+  
+
     
     //Lunch Restaurant Profile Content
     var restaurantProfileWidget = addRestaurantProfileContent({ parent: this });
@@ -186,3 +229,4 @@ define([
     // to the dialog
     return lunchApp;
 });
+
