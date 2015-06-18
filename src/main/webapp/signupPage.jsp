@@ -276,7 +276,7 @@
 
                                         if (data === 'failed') {
                                             setInterval(function () {
-                                                window.location.href = "/lunchApp2";
+                                                window.location.href = "/lunchApp";
                                             }, 500);
                                         } else {
                                             window.location.href = "/lunchApp";
