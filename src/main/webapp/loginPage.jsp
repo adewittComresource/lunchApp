@@ -248,7 +248,7 @@
                                         passwordNode.lastElementChild.style.borderColor = 'black';
                                         passwordNode.lastElementChild.style.borderWidth = '1px';
                                         
-                                       
+                                      
 //
 //                                        var jsonCookie = JSON.parse(data);
 //                                        var sessionID = jsonCookie.JSESSIONID;
