@@ -4,7 +4,9 @@
 html,body{
     height:100%;margin:0;padding:0
 }
-
+.lunchAppContainer{
+    height:100%;
+}
 .loading{
     font-size:1.5em;text-align:center;
 }

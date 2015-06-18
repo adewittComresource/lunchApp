@@ -41,11 +41,14 @@ restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,suggestRestaura
     }, "mainContainer");
     
     var mainTabContainer = new TabContainer({
-        style: "height: 100%; width: 100%;",
+//        style: "height:500px; width: 100%;",
         tabPosition:"top",
         useMenu: false, 
-        useSlider: false
+        useSlider: false,
+        doLayout:false
     });       
+    
+    lunchAppGlobal.mainTabContainer = mainTabContainer;
          //logout button
          var logoutpane = new ContentPane({
              content: "Welcome...!!!",
@@ -124,7 +127,8 @@ restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,suggestRestaura
     //Lunch Suggestions
     var suggestionPane = new ContentPane({
         title: "Suggestions",
-        content: suggestionWidget
+        content: suggestionWidget,
+        selected: true
     });
     mainTabContainer.addChild(suggestionPane);
 
@@ -147,7 +151,7 @@ restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,suggestRestaura
         content: restaurantProfileContentWidget
     });
     mainTabContainer.addChild(restaurantProfilePane);
-    
+
     on(restaurantProfilePane, "show", function(){
     restaurantProfileContentWidget.grid.resize();
     });
@@ -156,6 +160,7 @@ restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,suggestRestaura
     mainContainer.addChild(mainTabContainer);
     
     mainTabContainer.startup();
+    
 //    mainTabContainer.selectTab(suggestionPane);
     //Lunch Location Content
     var lunchLocationWidget = addLunchLocationContent({ parent: this });
@@ -187,43 +192,7 @@ restaurantGrid,restaurantProfileGrid,addRestaurantProfileContent,suggestRestaura
     });
     lunchAppGlobal.addLunchRestaurantProfileDialog = addLunchProfileDialog;
     addLunchProfileDialog.startup();
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     // Returning a value from an AMD module means that it becomes the value of the module. In this case, we return
     // the app object, which means that other parts of the application that require app/main could get a reference
     // to the dialog
