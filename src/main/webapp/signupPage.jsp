@@ -238,45 +238,27 @@
                                         "Content-Type": "application/json"
                                     },
                                     load: function (data) {
-                                        //Revert border styling
-                                        var passwordNode = dom.byId("passwordSignup");
-                                        passwordNode.lastElementChild.style.borderColor = 'black';
-                                        passwordNode.lastElementChild.style.borderWidth = '1px';
+                                        //Revert border styling                            
                                         loginUser();
-                                        
-//
-//                                        var jsonCookie = JSON.parse(data);
-//                                        var sessionID = jsonCookie.JSESSIONID;
-//                                        var readOnly = jsonCookie.readOnly;
-
-                                        if (data === 'failed') {
-//									var loginForm = dom.byId("autoLogin");
-//									loginForm.submit();                                                                
-                                            setInterval(function () {
-                                                window.location.href = "/lunchApp/signupPage.jsp";
-                                            }, 500);
-                                        } else {
-                                            window.location.href = "/lunchApp";
-                                        }
                                     },
                                     error: function (error) {
                                         // We'll 404 in the demo, but that's okay.  We don't have a 'postIt' service on the
                                         // docs server.
-                                        
-                                         var errorNode = dom.byId("signupNameError");
-                                         errorNode.innerHTML="Try with a Different NAME...:)";
-                                       
-                                     var errorNode = dom.byId("signupError");
-                                     errorNode.innerHTML="Error Creating User.!!!.User may Already Exist!!!";
-                                      
+
+                                        var errorNode = dom.byId("signupNameError");
+                                        errorNode.innerHTML = "Try with a Different NAME...:)";
+
+                                        var errorNode = dom.byId("signupError");
+                                        errorNode.innerHTML = "Error Creating User.!!!.User may Already Exist!!!";
+
                                     }
                                 };
                                 // Call the asynchronous xhrPost
                                 var deferred = dojo.xhrPost(xhrArgs);
                             }
                         };
-                        
-                         var loginUser = function () {
+
+                        var loginUser = function () {
                             //Get Input Values
                             var username = self.userNameTextbox.get('value');
                             var password = self.passwordTextbox.get('value');
@@ -290,22 +272,11 @@
                                         "Content-Type": "application/json"
                                     },
                                     load: function (data) {
-                                        //Revert border styling
-                                        var passwordNode = dom.byId("passwordLogin");
-                                        passwordNode.lastElementChild.style.borderColor = 'black';
-                                        passwordNode.lastElementChild.style.borderWidth = '1px';
-                                        
-                                       
-//
-//                                        var jsonCookie = JSON.parse(data);
-//                                        var sessionID = jsonCookie.JSESSIONID;
-//                                        var readOnly = jsonCookie.readOnly;
+
 
                                         if (data === 'failed') {
-//									var loginForm = dom.byId("autoLogin");
-//									loginForm.submit();                                                                
                                             setInterval(function () {
-                                                window.location.href = "/lunchApp";
+                                                window.location.href = "/lunchApp2";
                                             }, 500);
                                         } else {
                                             window.location.href = "/lunchApp";
@@ -313,7 +284,7 @@
                                     },
                                     error: function (error) {
                                         // We'll 404 in the demo, but that's okay.  We don't have a 'postIt' service on the
-                                      
+
                                     }
                                 };
                                 // Call the asynchronous xhrPost
