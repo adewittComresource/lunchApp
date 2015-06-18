@@ -32,10 +32,11 @@ html,body{
 .boxy{
     float:left;
     padding-left: 3%;
-    padding-right: 1%;
-    width: 28%;
+    padding-right: 2%;
+    width: 40%;
+    border: 10px  outset red;
 }
 .sugprofile{
-       padding-bottom:10%;
+       padding-bottom:15px;
     
 }
