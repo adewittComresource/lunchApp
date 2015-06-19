@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -24,6 +26,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 
 // DOcs on Path annotation
 // http://docs.oracle.com/cd/E19776-01/820-4867/6nga7f5nc/index.html
@@ -35,6 +39,11 @@ public class PickRestaurants {
     public Response getAll() throws Exception {
         EntityManager entityManager = PersistenceManager.getEntityManager();
         ResponseBuilder builder;
+        
+        //Delete the current Suggestions for that day.
+        deleteSuggestion(entityManager);
+        
+        
         //Get Session to act as a factory for the Criteria Instance
         Session sess = entityManager.unwrap(Session.class);
         Criteria crit = sess.createCriteria(Restaurants.class);
@@ -75,7 +84,6 @@ public class PickRestaurants {
     public void insertSuggestion(String restaurantId, EntityManager entityManager) throws Exception {
         SuggestHistory currentSuggestion = new SuggestHistory();
         String suggestHistoryId = UUID.randomUUID().toString();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
 
         currentSuggestion.setSuggestId(suggestHistoryId);
@@ -94,6 +102,43 @@ public class PickRestaurants {
                 entityManager.getTransaction().rollback();
                 System.out.println(e.getMessage());
                 log.error(e.getMessage());
+            }
+        }
+    }
+    
+    public void deleteSuggestion(EntityManager entityManager) throws Exception {
+        //Get a list of suggestions for this date
+        Session sess = entityManager.unwrap(Session.class);
+        //Get current Date and Filter Results with that date
+        Date currentDate = new Date();
+        Criteria crit = sess.createCriteria(SuggestHistory.class).add(Restrictions.eq("suggestDate", currentDate));
+        //Query for Results
+        Collection<?> suggestionResults = crit.list();
+        Iterator suggestionIterator = suggestionResults.iterator();
+        //loop through the list and delete 
+        while(suggestionIterator.hasNext()){
+            //Get current Row
+            SuggestHistory currentSuggestion = (SuggestHistory)suggestionIterator.next();
+            //Get Suggestion Id
+            String suggestionId = currentSuggestion.getSuggestId();
+            
+            try {
+                entityManager.getTransaction().begin();
+                // Find the File in the database
+                SuggestHistory found = entityManager.find(SuggestHistory.class, suggestionId);
+                if (found == null) {
+                    throw new PersistenceException("SuggestionHistory with key: " + suggestionId + " not found.");
+                }
+                // Delete Row
+                entityManager.remove(found);
+                entityManager.getTransaction().commit();
+                entityManager.detach(found);
+
+            } catch (Exception e) {
+                if (entityManager.getTransaction().isActive()) {
+                    entityManager.getTransaction().rollback();
+                    log.error(e.getMessage());
+                }
             }
         }
     }
