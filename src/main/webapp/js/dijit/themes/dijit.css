@@ -843,7 +843,7 @@ body .dijitAlignClient { position: absolute; }
  * .dijitBorderContainer is a stylized layout where panes have border and margin.
  */
 .dijitBorderContainer {
-	position:relative;
+	/* position:relative; */
 	overflow: hidden;
     z-index: 0; /* so z-index settings below have no effect outside of the BorderContainer */
 }
